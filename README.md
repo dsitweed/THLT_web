@@ -28,13 +28,13 @@ Các file cần sửa
 
 Sửa lỗi không ghi được vào model bởi đc bảo vệ 
 Trong file: AppServiceProvider.php
-``
-    public function boot()
-    {
-        //
-        Model::unguard();
-    }
-``
+```
+public function boot()
+{
+    //
+    Model::unguard();
+}
+```
 
 BUG: không thể lưu câu trả lời vào bảng answer
 - Nguyên nhân đang sử dụng ajax ? Sử dụng để làm gì vì sử dụng laravel rồi. 
