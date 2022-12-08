@@ -28,6 +28,7 @@ Các file cần sửa
 
 Sửa lỗi không ghi được vào model bởi đc bảo vệ 
 Trong file: AppServiceProvider.php
+
 ```
 public function boot()
 {
