@@ -46,16 +46,16 @@ class StudentController extends Controller
         $initialScore=0;
 
         $checker=Student::where('student_id','=',$sIdForValidate)->where('uniqueid','=',$examCodeForValidate)->count();
-        if ($checker>0) {
+        if ($checker > 0) {
             return "YOU ALREADY DONE THIS EXAM";
         }else{
             $student = Student::create([
             'student_id' => $request->input('student_id'),
             'uniqueid' => $request->input('exam_code'),
-            'score' =>$initialScore
+            'score' => $initialScore
             ]);
 
-            $id=$request->input('exam_code');
+            $id = $request->input('exam_code');
             $studentRealId=$request->input('student_id');
             $student_id=Student::where('student_id',$studentRealId)->value('id');
             $findcourse= Examinfo::where('uniqueid',$id)->value('id');

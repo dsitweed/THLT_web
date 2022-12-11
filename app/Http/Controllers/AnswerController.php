@@ -37,21 +37,55 @@ class AnswerController extends Controller
     public function store(Request $request)
     {
         //
-        if ($request->ajax()) {
-            $answer=Answer::create([
-                'stu_id' => $request->input('student_id'),
-                'question' => $request->input('question'),
-                'given_answer' => $request->input('answer'),
-                'true_answer' => $request->input('true_answer')
+        // if ($request->ajax()) {
+        //     $answer = Answer::create([
+        //         'stu_id' => $request->input('student_id'),
+        //         'question' => $request->input('question'),
+        //         'given_answer' => $request->input('answer'),
+        //         'true_answer' => $request->input('true_answer')
+        //     ]);
+        //     if ($request->input('answer') == $request->input('true_answer')) {
+        //         $insert=Student::where('id',$request->input('student_id'))->increment('score');
+        //     }
+        //     return response($answer);
+        // }else{
+        //     return "ajax not done";
+        // }
 
-            ]);
-            if ($request->input('answer')==$request->input('true_answer')) {
-                $insert=Student::where('id',$request->input('student_id'))->increment('score');
-            }
-            return response($answer);
-        }else{
-            return "ajax not done";
+        $stu_id = $_POST['student_id'];
+        $questions = $_POST['question'];
+
+        $true_answer = $_POST['true_answer'];
+        $given_answer = [];
+        
+        if(!isset($_POST['submit'])) {
+            return "Failed";
         }
+
+        for ($i = 0; $i < sizeof($questions); $i++) {
+            $cmp = "answer" . $i;
+            $given_answer[] = $_POST[$cmp];
+        }
+        // dd($given_answer);
+        
+        foreach ($questions as $i => $question) {
+            // echo $question;
+            // echo $stu_id;
+            // echo $true_answer[$i];
+            // echo '</br>';
+            $answer = Answer::create([
+                'stu_id' => $stu_id,
+                'question' => $question,
+                'given_answer' => $given_answer[$i],
+                'true_answer' => $true_answer[$i]
+            ]);
+
+            if ($given_answer[$i] == $true_answer[$i]) {
+                Student::where('id', $stu_id)->increment('score');
+            }
+        }
+
+        return "success";
     }
 
     /**
