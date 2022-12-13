@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('questions', function (Blueprint $table) {
+            $table->id();
             $table->integer('quiz_id')->unsigned();
             $table->string('question');
             $table->string('choice1');
@@ -23,7 +24,6 @@ return new class extends Migration
             $table->string('answer');
 
             $table->foreign('quiz_id')->references('id')->on('examinfos');
-            $table->id();
             $table->timestamps();
         });
     }

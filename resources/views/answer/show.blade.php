@@ -10,12 +10,12 @@ function countdown(minutes) {
     var mins = minutes
     function tick() {
         var counter = document.getElementById("timer");
-        var current_minutes = mins-1
+        var current_minutes = mins - 1;
         seconds--;
         counter.innerHTML =
         current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
         if( seconds > 0 ) {
-            timeoutHandle=setTimeout(tick, 1000);
+            timeoutHandle = setTimeout(tick, 1000);
         } else {
 
             if(mins > 1){
@@ -36,7 +36,7 @@ countdown('<?php echo $time; ?>');
 <!-- script for disable url -->
 <script type="text/javascript">
     var time= '<?php echo $time; ?>';
-    var realtime = time*60000;
+    var realtime = time * 60000;
     setTimeout(function () {
         alert('Time Out');
         window.location.href= '/';},

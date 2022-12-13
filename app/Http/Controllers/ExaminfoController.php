@@ -38,7 +38,7 @@ class ExaminfoController extends Controller
     public function store(Request $request)
     {
         //
-         $examinfo= new Examinfo;
+        $examinfo= new Examinfo;
 
         $examinfo = Examinfo::create([
                 'Teacher_id' => $request->input('Teacher_id'),
