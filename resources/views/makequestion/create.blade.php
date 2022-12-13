@@ -3,7 +3,7 @@
 @section('content')
 <h2 style="text-align: center;"><b>Create Questions System will redirect you when set is full</b></h2>
 <form method="post" action="{{route('makequestion.store')}}">
-	{{ csrf_field() }}
+	@csrf
     
 		<div class="col-md-6 col-lg-6 col-sm-6 col-lg-offset-3">
 		  <div class="form-group">
@@ -11,7 +11,7 @@
 		    <input type="text" name="question" class="form-control " id="formGroupExampleInput" required>
 		  </div>
 		  <div class="form-group">
-		    <label class="col-form-label" for="formGroupExampleInput2">option 1</label>
+		    <label class="col-form-label" for="formGroupExampleInput2">Option 1</label>
 		    <input type="text" name="option1" class="form-control" id="formGroupExampleInput2" required>
 		  </div>
 		  <div class="form-group">
@@ -31,12 +31,11 @@
 		    <input type="text" name="answer" class="form-control" id="formGroupExampleInput2" required>
 		  </div>
 		  <div class="form-group">
-		    <label class="col-form-label" for="formGroupExampleInput2">Quiz ID</label>
-		    <input type="hidden" name="quizid" class="form-control" id="formGroupExampleInput2" value="{{$examinfo->id}}" readonly>
+		    <label class="col-form-label" for="formGroupExampleInput2">Exam ID: {{$examinfo->id}}</label>
+		    <input type="hidden" name="examId" class="form-control" id="formGroupExampleInput2" value="{{$examinfo->id}}" readonly>
 		  </div>
 		  <button type="Submit" class="btn btn-success btn-block">Submit</button>
 		</div>
-
 </form>
 
-    @endsection
+@endsection

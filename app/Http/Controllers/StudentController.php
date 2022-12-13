@@ -39,13 +39,13 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         //
-        $student= new Student;
+        $student = new Student;
 
-        $sIdForValidate=$request->input('student_id');
-        $examCodeForValidate=$request->input('exam_code');
+        $sIdForValidate = $request->input('student_id');
+        $examCodeForValidate = $request->input('exam_code');
         $initialScore=0;
 
-        $checker=Student::where('student_id','=',$sIdForValidate)->where('uniqueid','=',$examCodeForValidate)->count();
+        $checker = Student::where('student_id','=',$sIdForValidate)->where('uniqueid','=',$examCodeForValidate)->count();
         if ($checker > 0) {
             return "YOU ALREADY DONE THIS EXAM";
         }else{
@@ -56,12 +56,12 @@ class StudentController extends Controller
             ]);
 
             $id = $request->input('exam_code');
-            $studentRealId=$request->input('student_id');
-            $student_id=Student::where('student_id',$studentRealId)->value('id');
-            $findcourse= Examinfo::where('uniqueid',$id)->value('id');
-            $findtime= Examinfo::where('uniqueid',$id)->value('time');
-            $course= Examinfo::where('uniqueid',$id)->value('Course');
-            $questions=Question::where('quiz_id',$findcourse)->get();
+            $studentRealId = $request->input('student_id');
+            $student_id = Student::where('student_id',$studentRealId)->value('id');
+            $findcourse = Examinfo::where('uniqueid',$id)->value('id');
+            $findtime = Examinfo::where('uniqueid',$id)->value('time');
+            $course = Examinfo::where('uniqueid',$id)->value('Course');
+            $questions = Question::where('quiz_id',$findcourse)->get();
             return view('answer.show')->with('questions', $questions)->with('student_id',$student_id)->with('course',$course)->with('time',$findtime);
         }
         

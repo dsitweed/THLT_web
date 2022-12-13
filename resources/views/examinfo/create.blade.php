@@ -7,7 +7,7 @@
 @endfor -->
 
 <form method="post" action="{{route('examinfo.store')}}">
-	{{ csrf_field() }}
+	@csrf
 
 	<div class="col-md-6 col-lg-6 col-sm-6 col-lg-offset-3">
 	  <div class="form-group">

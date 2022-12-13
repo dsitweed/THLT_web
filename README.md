@@ -1,16 +1,12 @@
-### Bản nguyên thủy 
-**[Link code tham khảo đầu tiên](https://github.com/hellomustaq/Online-Exam-with-laravel)**
-
-### Bản tham khảo mở rộng 
-
-**[Link tham khảo để nâng cấp chương trình](https://itsourcecode.com/free-projects/laravel/online-examination-system-project-in-laravel-with-source-code/)**
-
-
 #### Cấu hình 
 PHP 8.1.2
 
+### **[Link database design](638a088dbae3ed7c45445a4c)**
+
 Laravel Framework 9.43.0
 
+### Các thư viện sử dụng
+- Tailswind cho design 
 
 Các file cần sửa 
 - web.php
@@ -40,5 +36,7 @@ public function boot()
 }
 ```
 
-BUG: không thể lưu câu trả lời vào bảng answer
-- Nguyên nhân đang sử dụng ajax ? Sử dụng để làm gì vì sử dụng laravel rồi. 
+#### Tham khảo
+- [database design](https://www.inettutor.com/diagrams/exam-management-system-database-design/) 
+- **[Link code tham khảo đầu tiên](https://github.com/hellomustaq/Online-Exam-with-laravel)**
+- **[Link tham khảo để nâng cấp chương trình](https://www.campcodes.com/projects/php/online-examination-system-with-timer-using-php-mysql-free-download/)**
