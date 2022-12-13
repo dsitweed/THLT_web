@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->integer('quiz_id')->unsigned();
+            $table->foreignId('exam_id')->constrained('examInfos');
             $table->string('question');
             $table->string('choice1');
             $table->string('choice2');
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('choice4');
             $table->string('answer');
 
-            $table->foreign('quiz_id')->references('id')->on('examinfos');
+            $table->foreign('quiz_id')->references('id')->on('examInfos'); // Đây cũng là cách viết khóa ngoài nhưng hơi dài
             $table->timestamps();
         });
     }

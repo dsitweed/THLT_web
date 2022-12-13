@@ -49,11 +49,6 @@ class ExaminfoController extends Controller
             ]);
 
         return view('makequestion.create', ['examinfo' => $examinfo]);
-
-        // $examinfo->Teacher_id = $request->Teacher_id;
-        // $examinfo->Course = $request->Course;
-        // $examinfo->question_lenth = $request->question_lenth;
-
     }
 
     /**

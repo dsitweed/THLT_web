@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            $table->integer('stu_id')->unsigned();
-            $table->string('question');
+            $table->foreignId('student_id')->constrained('students');
+            $table->foreignId('question_id')->constrained('questions');
+            $table->foreignId('exam_id')->constrained('examInfos');
+            $table->foreignId('result_id')->constrained('results');
             $table->string('given_answer');
-            $table->string('true_answer');
 
-            $table->foreign('stu_id')->references('id')->on('students');
+            // cách thiết lập khóa ngoài theo cách cũ 
+            // $table->foreign('stu_id')->references('id')->on('students');
             
             $table->timestamps();
         });
