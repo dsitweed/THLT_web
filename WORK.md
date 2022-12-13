@@ -13,14 +13,19 @@
 ### 4. Các view
     - Landing page = login page (nếu chưa đăng nhập) - Đã xong
     // login, register, edit profile dùng của laravel 
-    - Home page (Thiết kế tùy sáng tạo)
-    - Trang làm bài thi (Đã có - chỉnh sửa cho đẹp hơn)
-    - Trang xem kết quả sau khi thi xong
-    - Trang xem tất cả các bài thi mình đã làm (có nút bấm -> trang xem kết quả 1 bài == trang xem kết quả sau thi xong)
+    ##### 1. Giáo viên
     - Trang xem các đề thi của mình
     - Trang xem các đề thi (Có bộ lọc)
     - Trang chỉnh sửa đê thi (đã có - cần chỉnh cho đẹp hơn)
     - Trang chỉnh sửa 1 câu (đã có) - Cái này có thể vứt di nhưng cần thiết kế phù hợp
+    - Home page (Thiết kế tùy sáng tạo)
+    ##### 2. Học sinh
+    - Home page
+    - Trang xem các đề thi (Có bộ lọc)
+    - Trang làm bài thi (Đã có - chỉnh sửa cho đẹp hơn)
+    - Trang xem kết quả sau khi thi xong
+    - Trang xem tất cả các bài thi mình đã làm (có nút bấm -> trang xem kết quả 1 bài == trang xem kết quả sau thi xong)
+
 ### Thắc mắc
 - Uniqueid dùng để làm gì 
 - tại sao khi tạo exam trong đường dẫn /examinfo/create -> ấn submit -> gửi đến controller route(examinfo.store) -> gửi tới view(makequestion.create). Đáng lẽ URL = makequestion/create tại sao lại hiển thị examinfo 
