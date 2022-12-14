@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('choice4');
             $table->string('answer');
 
-            $table->foreign('quiz_id')->references('id')->on('examInfos'); // Đây cũng là cách viết khóa ngoài nhưng hơi dài
+            // $table->foreign('quiz_id')->references('id')->on('examInfos'); // Đây cũng là cách viết khóa ngoài nhưng hơi dài
             $table->timestamps();
         });
     }

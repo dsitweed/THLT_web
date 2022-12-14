@@ -17,11 +17,13 @@
 </head> 
 
 <body>
+
+    {{-- Toggle navbar --}}
     <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
         <div class="container flex flex-wrap items-center justify-between mx-auto">
-            <a href="https://flowbite.com/" class="flex items-center">
-                <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
-                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+            <a href="#" class="flex items-center">
+                <img src="{{asset('images/logo.png')}}" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
+                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">THLT WEB</span>
             </a>
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
                 <div class="relative mt-3 md:hidden">
@@ -31,15 +33,40 @@
                     <input type="text" id="search-navbar" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search...">
                 </div>
                 <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                    <li>
-                        <a href="#" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Home</a>
+                    <li class="text-lg">
+                        <a href="/" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Home</a>
                     </li>
-                    <li>
+                    <li class="text-lg">
                         <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
                     </li>
-                    <li>
+                    <li class="text-lg">
                         <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
                     </li>
+                    {{-- Check is login ?--}}
+                    @guest
+                        <li class="text-lg">
+                            <a href="{{ route('login') }}" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Login</a>
+                        </li>
+                        <li class="text-lg">
+                            <a href="{{ route('register') }}" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Register</a>
+                        </li>
+                        
+                    @else
+                        <li class="text-lg">
+                            <a href="{{ route('logout') }}" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();"
+                            >Log out</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                        <li class="text-lg">
+                            <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                                User: {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+                        </li>
+                    @endguest
                 </ul>
             </div>
             <div class="flex md:order-2">
@@ -76,116 +103,54 @@
             </ul>
         </div>
     </nav>
+    @include('partials.errors')
+    @include('partials.success')
     
-    {{-- Toggle navbar --}}
-
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Online Exam') }}
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-            
-        </nav>
-        @include('partials.errors')
-        @include('partials.success')
-        @yield('content')
-    </div>
-
+    @yield('content')
     <!-- Scripts -->
     <div>
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
             });
-        });
 
-        $('.ansform').on('submit',function(e){
-            var form = $(this);
-            var submit = form.find("[type=submit]");
-            var submitOriginalText = submit.attr("value");
+            $('.ansform').on('submit',function(e){
+                var form = $(this);
+                var submit = form.find("[type=submit]");
+                var submitOriginalText = submit.attr("value");
 
-            e.preventDefault();
-            var data = form.serialize();
-            var url = form.attr('action');
-            var post = form.attr('method');
-            $.ajax({
-                type : post,
-                url : url,
-                data :data,
-                success:function(data){
-                   submit.attr("value", "Submitted");
-                },
-                beforeSend: function(){
-                   submit.attr("value", "Loading...");
-                   submit.prop("disabled", true);
-                },
-                error: function() {
-                    submit.attr("value", submitOriginalText);
-                    submit.prop("disabled", false);
-                   // show error to end user
-                }
+                e.preventDefault();
+                var data = form.serialize();
+                var url = form.attr('action');
+                var post = form.attr('method');
+                $.ajax({
+                    type : post,
+                    url : url,
+                    data :data,
+                    success:function(data){
+                    submit.attr("value", "Submitted");
+                    },
+                    beforeSend: function(){
+                    submit.attr("value", "Loading...");
+                    submit.prop("disabled", true);
+                    },
+                    error: function() {
+                        submit.attr("value", submitOriginalText);
+                        submit.prop("disabled", false);
+                    // show error to end user
+                    }
+                })
             })
-        })
-    </script>
-
-    @yield('script')
+        </script>
+        @yield('script')
     </div>
+
     <script language="javascript">
-        
-        
         function collapMenu() {
             var menu_content = document.getElementById("menu-content");
             if (menu_content.style.display === "none" || menu_content.style.display === "") {

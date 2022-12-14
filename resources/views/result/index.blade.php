@@ -2,8 +2,8 @@
 @section('content')
 
 <form method="get" action="{{route('result.create')}}">
-	{{ csrf_field() }}
-
+	@csrf
+	
 	<div class="col-md-6 col-lg-6 col-sm-6 col-lg-offset-3">
 		<h1>Search Your Result</h1>
 	  <div class="form-group">

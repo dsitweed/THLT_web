@@ -21,16 +21,18 @@ use App\Http\Controllers\QuestionController;
 */
 
 Route::get('/test', function () {
-    return view('layouts.app');
+    return view('teacher.showTeacherExam');
 });
-
-Route::get('/', function () {
-    return view('welcome');
-})->middleware(['auth', 'verified'])->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::get('/', function () {
+    return view('index');
+})->middleware(['auth', 'verified'])->name('index');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -50,7 +52,6 @@ Route::resource('/student', StudentController::class);
 Route::resource('/answer', AnswerController::class);
 Route::resource('/result', ResultController::class);
 
-Route::get('/test/{id}', [AnswerController::class, 'show']);
 
 /*
 Ex: Route::resource('photos', PhotoController::class);
