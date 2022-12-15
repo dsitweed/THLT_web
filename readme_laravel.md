@@ -11,3 +11,8 @@ php artisan migrate:refresh --seed
                     @endauth
                 </div>
             @endif
+Auth::routes() được định nghĩa trong file
+
+/vendor/laravel/framework/src/illuminate/Routing/Router.php Dưới đây là Auth::routes() của Laravel 6.3.0
+
+- set Link cho trang chủ sau khi login xong ở RouteServiceProvider.php (biến HOME)

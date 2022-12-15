@@ -6,6 +6,7 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ExaminfoController;
 use App\Http\Controllers\QuestionController;
 
@@ -21,7 +22,7 @@ use App\Http\Controllers\QuestionController;
 */
 
 Route::get('/test', function () {
-    return view('teacher.showTeacherExam');
+    return view('teacher.showAllExams');
 });
 
 Route::get('/dashboard', function () {
@@ -29,9 +30,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/', function () {
-    return view('index');
-})->middleware(['auth', 'verified'])->name('index');
+Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
 
 
 Route::middleware('auth')->group(function () {
@@ -52,9 +51,18 @@ Route::resource('/student', StudentController::class);
 Route::resource('/answer', AnswerController::class);
 Route::resource('/result', ResultController::class);
 
+// Cách tương đương nhưng viết như này hơi dài và gộp lại thành cách dưới 
+// Route::get('teacher/show-all-exams', [TeacherController::class, 'showAllExams'])->name('teacher.show-all-exams');
+// Route::get('teacher/create-new-exam', [TeacherController::class, 'createNewExam'])->name('teacher.create-new-exam');
+
+Route::controller(TeacherController::class)->group(function () {
+    Route::get('teacher/show-all-exams', 'showAllExams')->name('teacher.show-all-exams');
+    Route::post('teacher/save-new-exam', 'saveNewExam')->name('teacher.save-new-exam');
+});
 
 /*
 Ex: Route::resource('photos', PhotoController::class);
+Dùng resource thì nó sẽ đặt tên cho route luôn khi mình dùng route('student.index') chẳng hạn sẽ tiện (hơi khó hiểu 1 tí)
 Actions Handled By Resource Controller
 Verb	    URI	                    Action	Route Name
 GET	        /photos	                index	photos.index

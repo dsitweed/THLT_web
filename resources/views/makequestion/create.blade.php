@@ -1,8 +1,13 @@
 @extends('layouts.app')
 
+{{-- Truyền 1 tham số là Examinfo examinfo 
+	1 kiểu model Examinfo biến có tên là examinfo 
+--}}
+
 @section('content')
+<h1>Exam name: {{$examinfo->name}}</h1>
 <h2 style="text-align: center;"><b>Create Questions System will redirect you when set is full</b></h2>
-<form method="post" action="{{route('makequestion.store')}}">
+<form method="post" action="{{route('makequestion.store')}}">	
 	@csrf
     
 		<div class="col-md-6 col-lg-6 col-sm-6 col-lg-offset-3">
@@ -30,6 +35,7 @@
 		    <label class="col-form-label" for="formGroupExampleInput2">Answer</label>
 		    <input type="text" name="answer" class="form-control" id="formGroupExampleInput2" required>
 		  </div>
+		  {{-- Có thể ẩn label exam ID khi thiết kế giao diện đang để hiện cho dễ test  --}}
 		  <div class="form-group">
 		    <label class="col-form-label" for="formGroupExampleInput2">Exam ID: {{$examinfo->id}}</label>
 		    <input type="hidden" name="examId" class="form-control" id="formGroupExampleInput2" value="{{$examinfo->id}}" readonly>

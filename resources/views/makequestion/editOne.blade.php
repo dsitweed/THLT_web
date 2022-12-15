@@ -10,8 +10,10 @@
     <form method="post" action="{{route('makequestion.update', [$question->id])}}"> 
       @csrf 
       
+      {{-- HTML Chỉ hỗ trợ POST và GET nên muốn gửi PUT cần thêm dòng 15 --}}
+      {{-- Cách viết ngắn hơn cho dòng 15  @method('PUT') --}}
       <input type="hidden" name="_method" value="put">
-      <input type="hidden" name="quiz_id" value="{{$question->quiz_id}}">
+      <input type="hidden" name="exam_id" value="{{$question->exam_id}}">
       <div class="col-md-8 col-md-offset-2">
         <table class="table col-lg-6">
           <tbody>
@@ -77,7 +79,7 @@
             </div>
           </tbody>
         </table>
-        <input type="submit" class="btn btn-success btn-block" name="update" value="update">
+        <input type="submit" class="border-2 hover:cursor-pointer border-blue-800 p-3" name="update" value="update">
       </div>
     </form>
   </div>

@@ -35,3 +35,9 @@ exam code: JWU7r, 5619y, 6DNYy
 ### BUG 
 - Sửa lại phần edit exam, ở view(makequestion.edit)
 - Nếu exam có 0 question -> lỗi ở $questions = $_POST['question']; bên controller 
+
+### Phân quyền dễ nhất
+https://viblo.asia/p/huong-dan-phan-quyen-trong-laravel-bWrZnEQmKxw
+### phân quyền sâu hơn 
+- https://www.honeybadger.io/blog/user-roles-permissions-in-laravel/
+- https://viblo.asia/p/laravel-8-tao-roles-va-permissions-khong-su-dung-package-maGK761b5j2#_buoc-9-tao-du-lieu-de-test-8
