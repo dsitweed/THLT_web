@@ -4,7 +4,18 @@
     Sẽ nhận được 1 array đủ các thông tin ở dưới đặt tạm tên là $listExams 
  --}}
 @php
-    $listExams = [];
+    // dd($listExams);
+    $subject = App\Models\Course::all();
+    if (isset($_GET['filterSubject'])) {
+        $subjectFilter = $_GET['filterSubject'];
+        $tmp = [];
+        foreach ($listExams as $key => $value) {
+            if ($value->course_name == $subjectFilter){
+                $tmp[] = $value;
+            }
+        }
+        $listExams = $tmp;
+    } 
 @endphp
 
 @section('content')
@@ -18,12 +29,20 @@
                 <input type="text" id="search-navbar" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search...">
             </div>
             <div class="">
-                <select name="" id="" data-palaceholder="Filters"
-                    class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                >
-                    <option value="math">Math</option>
-                    <option value="physic">Physic</option>
-                </select>
+                <form id="filter" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+                    <select name="filterSubject" id="" data-palaceholder="Filters"
+                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                    >
+                        @foreach ($subject as $item)
+                            <option value="{{$item->name}}"
+                                class=""    
+                            > 
+                                {{strtoupper($item->name)}}
+                            </option>
+                        @endforeach
+                    </select>
+                    <button class="border-2 border-black p-2" type="submit">filter</button>
+                </form>
             </div>
         </div>
         
@@ -33,25 +52,33 @@
                     <?php $thClass = "border p-2 border-slate-400" ?>
                     <tr>
                         <th class="{{$thClass}}">Exam Id</th>
+                        <th class="{{$thClass}}">Exam name</th>
                         <th class="{{$thClass}}">Course Id</th>
                         <th class="{{$thClass}}">Course name</th>
                         <th class="{{$thClass}}">Uniqueid of Exam</th>
                         <th class="{{$thClass}}">Question number</th>
                         <th class="{{$thClass}}">Time</th>
+                        <th class="{{$thClass}}">Edit</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $tdClass = "text-center border border-slate-400 p-2" ?>
-                    @for ($i = 0; $i < 4; $i++)
+                    @foreach ($listExams as $item)
                         <tr>
-                            <td class="{{$tdClass}}">{{$i}}</td>
-                            <td class="{{$tdClass}}">12</td>
-                            <td class="{{$tdClass}}">Math</td>
-                            <td class="{{$tdClass}}">123Mh</td>
-                            <td class="{{$tdClass}}">50</td>
-                            <td class="{{$tdClass}}">90 minute</td>
+                            <td class="{{$tdClass}}">{{$item->id}}</td>
+                            <td class="{{$tdClass}}">{{$item->name}}</td>
+                            <td class="{{$tdClass}}">{{$item->course_id}}</td>
+                            <td class="{{$tdClass}}">{{$item->course_name}}</td>
+                            <td class="{{$tdClass}}">{{$item->uniqueid}}</td>
+                            <td class="{{$tdClass}}">{{$item->question_lenth}}</td>
+                            <td class="{{$tdClass}}">{{$item->time}} minute</td>
+                            <td class="{{$tdClass}}">
+                                <form action="/makequestion/{{$item->id}}/edit" method="get">
+                                    <button type="submit">Edit</button>
+                                </form>
+                            </td>
                         </tr>
-                    @endfor
+                    @endforeach
                 </tbody>
             </table>
             

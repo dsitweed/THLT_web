@@ -14,8 +14,8 @@
             <form action="{{route('examinfo.store')}}" method="post">
                 @csrf
                 <div class="flex flex-col mx-auto w-2/3">
-                    <input type="text" value="{{substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 5)), 0, 5)}}" name="uniqueid" class="form-control" id="formGroupExampleInput2">
-                    <input type="text" name="user_id" value="{{Auth::user()->id}}">
+                    <input type="hidden" value="{{substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 5)), 0, 5)}}" name="uniqueid" class="form-control" id="formGroupExampleInput2">
+                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
 
                     <label for="">Exam name</label>
                     <input type="text" id="name" name="name" :value="old('name')" required autofocus 
@@ -29,8 +29,8 @@
                         @foreach ($courses as $item)
                             <option value="{{$item->id}}">
                                 <div>
-                                    <span>{{$item->id}}</span>
-                                    <span>{{$item->name}}</span>
+                                    <span>Id: {{$item->id}}</span>
+                                    <span> - {{$item->name}}</span>
                                 </div>
                             </option>
                         @endforeach

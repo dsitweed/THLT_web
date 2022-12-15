@@ -51,8 +51,8 @@ class questionController extends Controller
             $examinfo = Examinfo::find($id);
             return view('makequestion.create', ['examinfo' => $examinfo]);
         }else{
-            $uniqueId = Examinfo::where('id','=',$id)->value('uniqueid');
-            return view('makequestion.index',['uniqueid' =>$uniqueId]);
+            $examinfo = Examinfo::where('id','=',$id)->get();
+            return view('makequestion.index',['examinfo' => $examinfo[0]]);
 
         }
 
@@ -74,7 +74,7 @@ class questionController extends Controller
             return view('makequestion.editOne')->with('questions',$selectAll);
         }else{ // for review all quetion 
         //this is for review teacher question
-        $selectIdForQuestion = Examinfo::where('uniqueid',$id)->value('id');
+        $selectIdForQuestion = Examinfo::where('id',$id)->value('id');
         $selectQuestions = Question::where('exam_id',$selectIdForQuestion)->get();
         return view('makequestion.edit')->with('questions',$selectQuestions);
         }

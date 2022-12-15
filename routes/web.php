@@ -57,7 +57,6 @@ Route::resource('/result', ResultController::class);
 
 Route::controller(TeacherController::class)->group(function () {
     Route::get('teacher/show-all-exams', 'showAllExams')->name('teacher.show-all-exams');
-    Route::post('teacher/save-new-exam', 'saveNewExam')->name('teacher.save-new-exam');
 });
 
 /*
