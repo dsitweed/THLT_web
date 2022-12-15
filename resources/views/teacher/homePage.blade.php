@@ -6,8 +6,6 @@
         <div class="basis-1/3">
             <a href="{{route('teacher.show-all-exams')}}">View all my exams</a>
             <br>
-            <a href="#">View All exams (of other teacher) - Chưa làm</a>
-            <br>
             <a href="{{route('examinfo.create')}}">Create new exams</a>
         </div>
         <div class="basis-2/3">right</div>

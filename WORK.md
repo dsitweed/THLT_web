@@ -8,6 +8,8 @@
 - Xem danh sách các bài thi đã tạo
 - Sửa bài thi (Để đơn giản không cho phép sửa bài thi sau khi có học sinh đã làm, Nếu không khi sửa truy vấn ngược lại để chấm lại điểm rất lằng nhằng)
 3. Tính năng của học sinh
+- Xem tất cả bài thi đã đăng kí khóa học // Chưa thiết kế db tương ứng để vòng 2 làm 
+- Xem tất cả bài thi có thể làm (Thay thế cho cái trên) - vòng 1
 - Làm bài thi
 - Xem các bài thi và kết quả
 ### 4. Các view
@@ -36,8 +38,15 @@ exam code: JWU7r, 5619y, 6DNYy
 - Sửa lại phần edit exam, ở view(makequestion.edit)
 - Nếu exam có 0 question -> lỗi ở $questions = $_POST['question']; bên controller 
 
+
+## 5. Cập nhật
+- thêm thời gian hoàn thành bài thi của học sinh trong bảng result
+- Chưa bảo vệ các route. Cụ thể đang đăng nhập student account nhưng truy vấn trực tiếp tới route của teacher bằng url cũng được 
+- Chưa có bảo vệ luồng khi đang kiểm tra back trở lại cũng ok -> sai logic 
+
 ### Phân quyền dễ nhất
 https://viblo.asia/p/huong-dan-phan-quyen-trong-laravel-bWrZnEQmKxw
 ### phân quyền sâu hơn 
 - https://www.honeybadger.io/blog/user-roles-permissions-in-laravel/
 - https://viblo.asia/p/laravel-8-tao-roles-va-permissions-khong-su-dung-package-maGK761b5j2#_buoc-9-tao-du-lieu-de-test-8
+

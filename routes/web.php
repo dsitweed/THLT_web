@@ -47,7 +47,6 @@ Route::get('/home', [HomeController::class, 'index']);
 
 Route::resource('/examinfo', ExaminfoController::class);
 Route::resource('/makequestion', QuestionController::class);
-Route::resource('/student', StudentController::class);
 Route::resource('/answer', AnswerController::class);
 Route::resource('/result', ResultController::class);
 
@@ -55,8 +54,17 @@ Route::resource('/result', ResultController::class);
 // Route::get('teacher/show-all-exams', [TeacherController::class, 'showAllExams'])->name('teacher.show-all-exams');
 // Route::get('teacher/create-new-exam', [TeacherController::class, 'createNewExam'])->name('teacher.create-new-exam');
 
+
+
+Route::controller(StudentController::class)->group(function () {
+    Route::get('student/show-all-exams', 'showAllExams')->name('student.show-all-exams');
+    Route::get('student/do-exam/{exam_id}', 'doExam')->name('student.do-exam');
+});
+
+
 Route::controller(TeacherController::class)->group(function () {
     Route::get('teacher/show-all-exams', 'showAllExams')->name('teacher.show-all-exams');
+    Route::get('teacher/show-student-result/{exam_id}', 'showStudentResult')->name('teacher.show-student-result');
 });
 
 /*

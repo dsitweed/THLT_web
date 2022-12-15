@@ -76,6 +76,9 @@
                                 <form action="/makequestion/{{$item->id}}/edit" method="get">
                                     <button type="submit">Edit</button>
                                 </form>
+                                <form action="/teacher/show-student-result/{{$item->id}}" method="get">
+                                    <button type="submit">Student result</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

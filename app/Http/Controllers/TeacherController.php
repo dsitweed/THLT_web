@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Course;
+use App\Models\Result;
+use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Examinfo;
 use Illuminate\Http\Request;
@@ -24,5 +27,21 @@ class TeacherController extends Controller
             $listExams[$key]->course_name = $course->name; 
         }
         return view('teacher.showAllExams', ['listExams' => $listExams]);
+    }
+
+    public function showStudentResult($exam_id) {
+        $exam = Examinfo::find($exam_id);
+        $listResult = Result::where('exam_id', $exam_id)->get(); 
+
+        foreach ($listResult as $key => $value) {
+            $student = Student::find($value->student_id);
+            $user = User::find($student->user_id);
+            $listResult[$key]->student_name = $user->name;
+        }
+
+        return view('teacher.showStudentResult', [
+            'listResult' => $listResult,
+            'exam' => $exam,
+        ]);
     }
 }
