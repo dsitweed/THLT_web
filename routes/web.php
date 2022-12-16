@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
@@ -65,6 +66,12 @@ Route::controller(StudentController::class)->group(function () {
 Route::controller(TeacherController::class)->group(function () {
     Route::get('teacher/show-all-exams', 'showAllExams')->name('teacher.show-all-exams');
     Route::get('teacher/show-student-result/{exam_id}', 'showStudentResult')->name('teacher.show-student-result');
+});
+
+Route::controller(CourseController::class)->group(function () {
+    Route::get('course/', 'index')->name('course.index');
+    Route::get('course/create', 'create')->name('course.create');
+    Route::post('course/store', 'store')->name('course.store');
 });
 
 /*
