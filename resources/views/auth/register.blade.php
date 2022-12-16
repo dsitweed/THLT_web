@@ -22,7 +22,10 @@
             <div class="mt-4">
                 <x-input-label for="role" :value="__('Role')" />
 
-                <x-select-input id="role" class="block mt-1 w-full" type="text" name="role" :value="old('role')" required/>
+                <select id='role' class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" type="text" name="role" :value="old('role')" required>
+                    <option value="student" selected>Student</option>
+                    <option value="teacher">Teacher</option>
+                </select>
 
                 <x-input-error :messages="$errors->get('role')" class="mt-2" />
             </div>
