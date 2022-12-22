@@ -2,102 +2,52 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Student;
 use App\Models\Answer;
+use App\Models\Course;
+use App\Models\Result;
+use App\Models\Student;
 use App\Models\Examinfo;
+use App\Models\Question;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ResultController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
-        return view('result.index');
+        $student = Student::where('user_id', Auth::user()->id)->first();
+        $listResult = Result::where('student_id', $student->id)->get();
+
+        foreach ($listResult as $key => $value) {
+            $exam = Examinfo::find($value->exam_id);
+            $course = Course::find($exam->course_id);
+            $listResult[$key]->exam_id = $exam->id;
+            $listResult[$key]->exam_name = $exam->name;
+            $listResult[$key]->exam_time = $exam->time;
+            $listResult[$key]->question_lenth = $exam->question_lenth;
+            $listResult[$key]->course_name = $course->name;
+        }
+
+        return view('result.index', [
+            'listResult' => $listResult,
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $var)
-    {
-        //
-        $getId=$var->input('student_id');
-        $getExamCode=$var->input('exam_code');
-        $getCourseName=Examinfo::where('uniqueid',$getExamCode)->value('Course');
-
-        $getScore=Student::where(
-            ['student_id'=>$getId,
-             'uniqueid'=>$getExamCode
-        ])->value('score');
-        $findStudentIdForAnswerSheet=Student::where(
-            ['student_id'=>$getId,
-             'uniqueid'=>$getExamCode
-        ])->value('id');
-        $answeredQuestion=Answer::where('stu_id',$findStudentIdForAnswerSheet)->get();
-        return view('result.showall')->with('answeredQuestion',$answeredQuestion)->with('getScore',$getScore)->with('studentId',$getId)->with('course',$getCourseName);
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function show($result_id) {
+        $score = Result::find($result_id)->value('score');
+        $resultDetail = Answer::where('result_id', $result_id)->get();
+        foreach ($resultDetail as $key => $value) {
+            $question = Question::find($value->question_id);
+            $resultDetail[$key]->question = $question->question;
+            $resultDetail[$key]->choice1 = $question->choice1;
+            $resultDetail[$key]->choice2 = $question->choice2;
+            $resultDetail[$key]->choice3 = $question->choice3;
+            $resultDetail[$key]->choice4 = $question->choice4;
+            $resultDetail[$key]->answer = $question->answer;
+        }
+        return view('result.show', [
+            'resultDetail' => $resultDetail,
+            'score' => $score,
+        ]);
     }
 }

@@ -15,9 +15,8 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->integer('student_id');
-            $table->string('uniqueid');
-            $table->integer('score')->nullable();
+            $table->string('user_id');
+            $table->string('uniqueid')->nullable();
             $table->timestamps();
         });
     }

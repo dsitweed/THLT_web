@@ -1,20 +1,21 @@
 @extends('layouts.app')
 
 {{--
-    Sẽ nhận được 1 array đủ các thông tin ở dưới đặt tạm tên là $listResults 
+    Sẽ nhận được 1 array đủ các thông tin ở dưới đặt tạm tên là $listExams 
  --}}
 @php
+    // dd($listExams);
     $subject = App\Models\Course::all();
     if (isset($_GET['filterSubject'])) {
         $subjectFilter = $_GET['filterSubject'];
         $tmp = [];
-        foreach ($listResult as $key => $value) {
+        foreach ($listExams as $key => $value) {
             if ($value->course_name == $subjectFilter){
                 $tmp[] = $value;
             }
         }
-        $listResult  = $tmp;
-    }
+        $listExams = $tmp;
+    } 
 @endphp
 
 @section('content')
@@ -27,23 +28,24 @@
                 </div>
                 <input type="text" id="search-navbar" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search...">
             </div>
-            <div class="fleter_div">
-                <form id="filter" class="flex flex-row" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get"
-                    class="block min-w-fit bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                >
+            <div class="">
+                <form class="flex flex-row" id="filter" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
                     <select name="filterSubject" id="" data-palaceholder="Filters"
-                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                    >
-                        <option <?php if (isset($_GET['filterSubject'])) echo 'hidden' ?> selected >{{isset($_GET['filterSubject']) ? $_GET['filterSubject'] : "Select"}}</option>
+                    class="block min-w-fit bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    >   
+                    <option <?php if (isset($_GET['filterSubject'])) echo 'hidden' ?> selected >{{isset($_GET['filterSubject']) ? $_GET['filterSubject'] : "Select"}}</option>
                         @foreach ($subject as $item)
-                            <option value="{{$item->name}}"
-                                class=""    
-                            > 
+                            <option value="{{$item->name}}"> 
                                 {{$item->name}}
                             </option>
                         @endforeach
                     </select>
-                    <button type="submit" class="bg-gray-50 ml-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">filter</button>
+                    <button 
+                    class="bg-gray-50 ml-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        type="submit"
+                    >
+                        filter
+                    </button>
                 </form>
             </div>
         </div>
@@ -55,38 +57,37 @@
                     <tr>
                         <th class="{{$thClass}}">Exam Id</th>
                         <th class="{{$thClass}}">Exam name</th>
-                        <th class="{{$thClass}}">Time</th>
+                        <th class="{{$thClass}}">Course Id</th>
                         <th class="{{$thClass}}">Course name</th>
                         <th class="{{$thClass}}">Question number</th>
-                        <th class="{{$thClass}}">Score</th>
-                        <th class="{{$thClass}}">Created at</th>
-                        <th class="{{$thClass}}">View</th>
+                        <th class="{{$thClass}}">Time</th>
+                        <th class="{{$thClass}}">Edit</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $tdClass = "text-center border border-slate-400 p-2" ?>
-                    @foreach ($listResult as $item)
+                    @foreach ($listExams as $item)
                         <tr>
-                            <td class="{{$tdClass}}">{{$item->exam_id}}</td>
-                            <td class="{{$tdClass}}">{{$item->exam_name}}</td>
-                            <td class="{{$tdClass}}">{{$item->exam_time}} minute</td>
+                            <td class="{{$tdClass}}">{{$item->id}}</td>
+                            <td class="{{$tdClass}}">{{$item->name}}</td>
+                            <td class="{{$tdClass}}">{{$item->course_id}}</td>
                             <td class="{{$tdClass}}">{{$item->course_name}}</td>
                             <td class="{{$tdClass}}">{{$item->question_lenth}}</td>
-                            <td class="{{$tdClass}}">{{$item->score}}</td>
-                            <td class="{{$tdClass}}">{{$item->created_at}}</td>
+                            <td class="{{$tdClass}}">{{$item->time}} minute</td>
                             <td class="{{$tdClass}}">
-                                {{-- send result_id --}}
-                                <form action="{{route('result.show', [$item->id])}}" method="get">
-                                    <button type="submit">View</button>
+                                <form action="/makequestion/{{$item->id}}/edit" method="get">
+                                    <button type="submit">Edit</button>
+                                </form>
+                                <form action="/teacher/show-student-result/{{$item->id}}" method="get">
+                                    <button type="submit">Student result</button>
                                 </form>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            
         </div>
-        
-        {{-- pagination  --}}
         <div class="pagination flex justify-between my-5 items-center">
             <div>
                 <p>Showing 1 to <strong>10</strong> of <strong>30</strong> results</p>

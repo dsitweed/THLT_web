@@ -1,37 +1,63 @@
 @extends('layouts.app')
 
+@php
+    $teacher = App\Models\Teacher::where('user_id', Auth::user()->id)->get();
+    $courses = App\Models\Course::where('teacher_id', $teacher[0]->id)->get();
+@endphp
+
 @section('content')
+    @if (count($teacher) != 1)
+        <h1>ERROR</h1>
+    @else
+        <div class="">
+            <h1 class="text-center text-4xl">Create new exam</h1>
+            <form action="{{route('examinfo.store')}}" method="post">
+                @csrf
+                <div class="flex flex-col mx-auto w-2/3">
+                    <input type="hidden" value="{{substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 5)), 0, 5)}}" name="uniqueid" class="form-control" id="formGroupExampleInput2">
+                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
 
-<!-- @for ($i = 0; $i < 10; $i++)
-    The current value is {{ $i }}
-@endfor -->
+                    <label for="">Exam name</label>
+                    <input type="text" id="name" name="name" :value="old('name')" required autofocus 
+                        class="block mt-1 w-full"
+                    />
+                    @error('name')
+                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                    @enderror
 
-<form method="post" action="{{route('examinfo.store')}}">
-	{{ csrf_field() }}
+                    <label for="">Course id</label>
+                    <select id="course_id" name="course_id" :value="old('course_id')" required
+                        class=""
+                    >
+                        @foreach ($courses as $item)
+                            <option value="{{$item->id}}">
+                                <div>
+                                    <span>Id: {{$item->id}}</span>
+                                    <span> - {{$item->name}}</span>
+                                </div>
+                            </option>
+                        @endforeach
+                    </select>
 
-	<div class="col-md-6 col-lg-6 col-sm-6 col-lg-offset-3">
-	  <div class="form-group">
-	    <label class="col-form-label" for="formGroupExampleInput">Teacher ID</label>
-	    <input type="text" name="Teacher_id" class="form-control " id="formGroupExampleInput" placeholder="example:someone111" required>
-	  </div>
-	  <div class="form-group">
-	    <label class="col-form-label" for="formGroupExampleInput2">Course Name</label>
-	    <input type="text" name="Course" class="form-control" id="formGroupExampleInput2" placeholder="example:SWE111" required>
-	  </div>
-	  <div class="form-group">
-	    <label class="col-form-label" for="formGroupExampleInput2">Number Of Question</label>
-	    <input type="text" name="question_lenth" class="form-control" id="formGroupExampleInput2" placeholder="E.g 10" required>
-	  </div>
-	  <div class="form-group">
-	    <label class="col-form-label" for="formGroupExampleInput2">Set time</label>
-	    <input type="text" name="time" class="form-control" id="formGroupExampleInput2" placeholder="Enter In Minite" required>
-	  </div>
-	  <div class="form-group">
-	    <input type="hidden" value="{{substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 5)), 0, 5)}}" name="uniqueid" class="form-control" id="formGroupExampleInput2">
-	  </div>
-	  <button type="Submit" class="btn btn-success btn-block">Submit</button>
-	</div>
+                    <label for="">Number of question </label>
+                    <input type="number" min="1" id="question_lenth" name="question_lenth" :value="old('question_lenth')" required 
+                        class="block mt-1 w-full"
+                    />
+                    @error('question_lenth')
+                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                    @enderror
 
-</form>
+                    <label for="">Set time (minutes)</label>
+                    <input type="number" min="1" id="time" name="time" :value="old('time')" required 
+                        class="block mt-1 w-full"
+                    />
+                    @error('time')
+                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                    @enderror
 
-    @endsection
+                    <button>Submit</button>
+                </div>
+            </form>
+        </div>
+    @endif
+@endsection

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Teacher;
 use App\Models\Examinfo;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ExaminfoController extends Controller
 {
@@ -14,8 +16,7 @@ class ExaminfoController extends Controller
      */
     public function index()
     {
-        //
-        return view('examinfo.create');
+        // 
     }
 
     /**
@@ -25,7 +26,6 @@ class ExaminfoController extends Controller
      */
     public function create()
     {
-        //
         return view('examinfo.create');
     }
 
@@ -37,23 +37,29 @@ class ExaminfoController extends Controller
      */
     public function store(Request $request)
     {
-        //
-         $examinfo= new Examinfo;
+        $teacher = Teacher::where('user_id', $request->input('user_id'))->get();
+        if (count($teacher) != 1) {
+            return view(abort(403));
+        }
+        $formField = $request->validate([
+            'name' => Rule::unique('examInfos', 'name'),
+            'question_lenth' => ['integer' ,'gt:0'],
+            'time' => ['integer', 'gt:0']
+        ]);
+        
+
+        // Thiếu validate dữ liệu ở đây
+        // đang lỗi nếu nhập not unique name của exam 
 
         $examinfo = Examinfo::create([
-                'Teacher_id' => $request->input('Teacher_id'),
-                'Course' => $request->input('Course'),
+                'name' => $request->input('name'),
+                'teacher_id' => $teacher[0]->id,
+                'course_id' => $request->input('course_id'),
                 'question_lenth' => $request->input('question_lenth'),
-                'uniqueid' => $request->input('uniqueid'),
                 'time' => $request->input('time')
             ]);
 
         return view('makequestion.create', ['examinfo' => $examinfo]);
-
-        // $examinfo->Teacher_id = $request->Teacher_id;
-        // $examinfo->Course = $request->Course;
-        // $examinfo->question_lenth = $request->question_lenth;
-
     }
 
     /**

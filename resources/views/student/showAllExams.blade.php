@@ -1,20 +1,22 @@
 @extends('layouts.app')
 
 {{--
-    Sẽ nhận được 1 array đủ các thông tin ở dưới đặt tạm tên là $listResults 
+    Sẽ nhận được 1 array đủ các thông tin ở dưới đặt tạm tên là $listExams 
+    tu teacherController
  --}}
 @php
+    // dd($listExams);
     $subject = App\Models\Course::all();
     if (isset($_GET['filterSubject'])) {
         $subjectFilter = $_GET['filterSubject'];
         $tmp = [];
-        foreach ($listResult as $key => $value) {
+        foreach ($listExams as $key => $value) {
             if ($value->course_name == $subjectFilter){
                 $tmp[] = $value;
             }
         }
-        $listResult  = $tmp;
-    }
+        $listExams = $tmp;
+    } 
 @endphp
 
 @section('content')
@@ -55,38 +57,38 @@
                     <tr>
                         <th class="{{$thClass}}">Exam Id</th>
                         <th class="{{$thClass}}">Exam name</th>
-                        <th class="{{$thClass}}">Time</th>
+                        <th class="{{$thClass}}">Course Id</th>
                         <th class="{{$thClass}}">Course name</th>
+                        <th class="{{$thClass}}">Teacher of course</th>
+                        {{-- <th class="{{$thClass}}">Uniqueid of Exam</th> --}}
                         <th class="{{$thClass}}">Question number</th>
-                        <th class="{{$thClass}}">Score</th>
-                        <th class="{{$thClass}}">Created at</th>
-                        <th class="{{$thClass}}">View</th>
+                        <th class="{{$thClass}}">Time</th>
+                        <th class="{{$thClass}}">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $tdClass = "text-center border border-slate-400 p-2" ?>
-                    @foreach ($listResult as $item)
+                    @foreach ($listExams as $item)
                         <tr>
-                            <td class="{{$tdClass}}">{{$item->exam_id}}</td>
-                            <td class="{{$tdClass}}">{{$item->exam_name}}</td>
-                            <td class="{{$tdClass}}">{{$item->exam_time}} minute</td>
+                            <td class="{{$tdClass}}">{{$item->id}}</td>
+                            <td class="{{$tdClass}}">{{$item->name}}</td>
+                            <td class="{{$tdClass}}">{{$item->course_id}}</td>
                             <td class="{{$tdClass}}">{{$item->course_name}}</td>
+                            <td class="{{$tdClass}}">{{$item->teacher_name}}</td>
+                            {{-- <td class="{{$tdClass}}">{{$item->uniqueid}}</td> --}}
                             <td class="{{$tdClass}}">{{$item->question_lenth}}</td>
-                            <td class="{{$tdClass}}">{{$item->score}}</td>
-                            <td class="{{$tdClass}}">{{$item->created_at}}</td>
+                            <td class="{{$tdClass}}">{{$item->time}} minute</td>
                             <td class="{{$tdClass}}">
-                                {{-- send result_id --}}
-                                <form action="{{route('result.show', [$item->id])}}" method="get">
-                                    <button type="submit">View</button>
+                                <form action="/student/do-exam/{{$item->id}}" method="get">
+                                    <button type="submit">Do exam</button>
                                 </form>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            
         </div>
-        
-        {{-- pagination  --}}
         <div class="pagination flex justify-between my-5 items-center">
             <div>
                 <p>Showing 1 to <strong>10</strong> of <strong>30</strong> results</p>

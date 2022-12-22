@@ -14,10 +14,6 @@ class questionController extends Controller
     {
         //
         //$trapleSelect=Examinfo::find();
-
-
-
-        return view('makequestion.create');
     }
 
 
@@ -34,7 +30,7 @@ class questionController extends Controller
         $question= new Question;
 
         $question = Question::create([
-                'quiz_id' => $request->input('quizid'),
+                'exam_id' => $request->input('examId'),
                 'question' => $request->input('question'),
                 'choice1' => $request->input('option1'),
                 'choice2' => $request->input('option2'),
@@ -44,19 +40,19 @@ class questionController extends Controller
 
             ]);
 
-        $id = $request->input('quizid');
+        $id = $request->input('examId');
 
-        $qustionCount=Question::where('quiz_id','=', $id)->count();
+        $questionCount = Question::where('exam_id','=', $id)->count();
 
-        $selectLenth=Examinfo::where('id','=',$id)->value('question_lenth');
-        //return $selectLenth;
+        $selectLength = Examinfo::where('id', '=', $id)->value('question_lenth');
+        //return number of question in exam have id = input(examId);
 
-        if ($qustionCount < $selectLenth ) {
+        if ($questionCount < $selectLength ) {
             $examinfo = Examinfo::find($id);
             return view('makequestion.create', ['examinfo' => $examinfo]);
         }else{
-            $uniqueId=Examinfo::where('id','=',$id)->value('uniqueid');
-            return view('makequestion.index',['uniqueid' =>$uniqueId]);
+            $examinfo = Examinfo::where('id','=',$id)->get();
+            return view('makequestion.index',['examinfo' => $examinfo[0]]);
 
         }
 
@@ -71,15 +67,15 @@ class questionController extends Controller
 
     public function edit($id)
     {
-        //
+        // for edit question 
         if (isset($_GET['submitFromEditPage'])) {
-            $questionid=$id;
-            $selectAll=Question::where('id',$questionid)->get();
-            return view('makequestion.editone')->with('questions',$selectAll);
-        }else{
+            $questionId = $id;
+            $selectAll = Question::where('id',$questionId)->get();
+            return view('makequestion.editOne')->with('questions',$selectAll);
+        }else{ // for review all quetion 
         //this is for review teacher question
-        $selectIdForQuestion=Examinfo::where('uniqueid',$id)->value('id');
-        $selectQuestions=Question::where('quiz_id',$selectIdForQuestion)->get();
+        $selectIdForQuestion = Examinfo::where('id',$id)->value('id');
+        $selectQuestions = Question::where('exam_id',$selectIdForQuestion)->get();
         return view('makequestion.edit')->with('questions',$selectQuestions);
         }
     }
@@ -87,8 +83,8 @@ class questionController extends Controller
 
     public function update(Request $request, $id)
     {
-        $quiz_id=$request->input('quiz_id');
-        $update=Question::where('id',$id)->update([
+        $exam_id = $request->input('exam_id');
+        $update = Question::where('id',$id)->update([
                            'question' => $request->input('question'),
                            'choice1' => $request->input('choice1'),
                            'choice2' => $request->input('choice2'),
@@ -97,8 +93,8 @@ class questionController extends Controller
                            'answer' => $request->input('answer')
 
                         ]);
-        $selectQuestions=Question::where('quiz_id',$quiz_id)->get();
-        return view('makequestion.edit')->with('questions',$selectQuestions)->with('success', 'update success');
+        $selectQuestions = Question::where('exam_id',$exam_id)->get();
+        return view('makequestion.edit')->with('questions', $selectQuestions)->with('success', 'update success');
     }
 
 

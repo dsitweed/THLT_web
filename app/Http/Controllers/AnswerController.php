@@ -2,135 +2,58 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Answer;
+use App\Models\Result;
 use App\Models\Student;
+use Illuminate\Http\Request;
 
 class AnswerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
-        // if ($request->ajax()) {
-        //     $answer = Answer::create([
-        //         'stu_id' => $request->input('student_id'),
-        //         'question' => $request->input('question'),
-        //         'given_answer' => $request->input('answer'),
-        //         'true_answer' => $request->input('true_answer')
-        //     ]);
-        //     if ($request->input('answer') == $request->input('true_answer')) {
-        //         $insert=Student::where('id',$request->input('student_id'))->increment('score');
-        //     }
-        //     return response($answer);
-        // }else{
-        //     return "ajax not done";
-        // }
 
-        $stu_id = $_POST['student_id'];
-        $questions = $_POST['question'];
+        $student_id = $_POST['student_id']; // 1
+        $exam_id = $_POST['exam_id']; // 1
+        $question_id = $_POST['question_id']; // Array
 
-        $true_answer = $_POST['true_answer'];
-        $given_answer = [];
+        $true_answer = $_POST['true_answer']; // Array
+        $given_answer = []; 
         
-        if(!isset($_POST['submit'])) {
-            return "Failed";
-        }
-
-        for ($i = 0; $i < sizeof($questions); $i++) {
+        for ($i = 0; $i < sizeof($true_answer); $i++) {
             $cmp = "answer" . $i;
-            $given_answer[] = $_POST[$cmp];
+            if (isset($_POST[$cmp])) $given_answer[] = $_POST[$cmp];
         }
-        // dd($given_answer);
-        
-        foreach ($questions as $i => $question) {
-            // echo $question;
-            // echo $stu_id;
-            // echo $true_answer[$i];
-            // echo '</br>';
-            $answer = Answer::create([
-                'stu_id' => $stu_id,
-                'question' => $question,
-                'given_answer' => $given_answer[$i],
-                'true_answer' => $true_answer[$i]
-            ]);
 
-            if ($given_answer[$i] == $true_answer[$i]) {
-                Student::where('id', $stu_id)->increment('score');
+        // chưa báo được lỗi khi không trả lời đủ câu hỏi 
+        if (count($true_answer) != count($given_answer)) {
+            return redirect(url()->previous())->with('error', "not answer full");
+        }
+
+        $score = 0;
+        foreach ($true_answer as $key => $value) {
+            if ($value == $given_answer[$key]) {
+                $score++;
             }
         }
 
-        return "success";
+        $result = Result::create([
+            'student_id' => $student_id,
+            'exam_id' => $exam_id,
+            'score' => $score,
+        ]);
+
+
+        foreach ($question_id as $key => $value) {
+            $answer = Answer::create([
+                'student_id' => $student_id,
+                'question_id' => $value,
+                'exam_id' => $exam_id,
+                'result_id' => $result->id,
+                'given_answer' => $true_answer[$key]
+            ]);
+        }
+
+        return redirect('/');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

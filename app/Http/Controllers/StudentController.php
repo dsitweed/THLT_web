@@ -2,33 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Course;
 use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\Examinfo;
 use App\Models\Question;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-        return view('student.create');
+
+   public function showAllExams() {
+    // Sau này sẽ lấy tất cả những bài test ở các khóa học mà học sinh đã đăng ký 
+    // dd(Auth::user()->name);
+    // $user_id = Auth::user()->id;
+
+    $listExams = Examinfo::all();
+
+    foreach ($listExams as $key => $value) {
+        $course = Course::find($value->course_id);
+        $listExams[$key]->course_name = $course->name;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    foreach ($listExams as $key => $value) {
+        $teacher = Teacher::find($value->teacher_id);
+        $user_teacher = User::find($teacher->user_id);
+        $listExams[$key]->teacher_name = $user_teacher->name;
     }
+
+    return view('student.showAllExams', ['listExams' => $listExams]);
+   }
+   
+   public function doExam(Request $request, $exam_id) {
+    // dd($exam_id);
+    $exam = Examinfo::find($exam_id);
+    $course = Course::find($exam->course_id);
+    $exam->course_name = $course->name; // add course name to exam parameter
+
+    $questions = Question::where('exam_id', $exam->id)->get();
+    return view('student.doExam', [
+        'exam' => $exam,
+        'questions' => $questions,
+    ]);
+   }
 
     /**
      * Store a newly created resource in storage.
@@ -36,16 +54,18 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    // BUG
     public function store(Request $request)
     {
         //
-        $student= new Student;
+        $student = new Student;
 
-        $sIdForValidate=$request->input('student_id');
-        $examCodeForValidate=$request->input('exam_code');
+        $sIdForValidate = $request->input('student_id');
+        $examCodeForValidate = $request->input('exam_code');
         $initialScore=0;
 
-        $checker=Student::where('student_id','=',$sIdForValidate)->where('uniqueid','=',$examCodeForValidate)->count();
+        $checker = Student::where('student_id','=',$sIdForValidate)->where('uniqueid','=',$examCodeForValidate)->count();
         if ($checker > 0) {
             return "YOU ALREADY DONE THIS EXAM";
         }else{
@@ -56,62 +76,16 @@ class StudentController extends Controller
             ]);
 
             $id = $request->input('exam_code');
-            $studentRealId=$request->input('student_id');
-            $student_id=Student::where('student_id',$studentRealId)->value('id');
-            $findcourse= Examinfo::where('uniqueid',$id)->value('id');
-            $findtime= Examinfo::where('uniqueid',$id)->value('time');
-            $course= Examinfo::where('uniqueid',$id)->value('Course');
-            $questions=Question::where('quiz_id',$findcourse)->get();
+            $studentRealId = $request->input('student_id');
+            $student_id = Student::where('student_id',$studentRealId)->value('id');
+            $findcourse = Examinfo::where('uniqueid',$id)->value('id');
+            $findtime = Examinfo::where('uniqueid',$id)->value('time');
+            $course = Examinfo::where('uniqueid',$id)->value('Course');
+            $questions = Question::where('quiz_id',$findcourse)->get();
             return view('answer.show')->with('questions', $questions)->with('student_id',$student_id)->with('course',$course)->with('time',$findtime);
         }
         
 
         //return $this->show($request->input('exam_code'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-        
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
