@@ -19,9 +19,8 @@ return new class extends Migration
             $table->foreignId('teacher_id')->constrained('Teachers');
             $table->foreignId('course_id')->constrained('Courses');
             $table->integer('question_lenth');
-            $table->string('uniqueid');
             $table->string('time');
-            
+
             $table->timestamps();
         });
     }
