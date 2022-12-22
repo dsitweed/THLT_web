@@ -21,6 +21,9 @@
                     <input type="text" id="name" name="name" :value="old('name')" required autofocus 
                         class="block mt-1 w-full"
                     />
+                    @error('name')
+                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                    @enderror
 
                     <label for="">Course id</label>
                     <select id="course_id" name="course_id" :value="old('course_id')" required
@@ -37,14 +40,21 @@
                     </select>
 
                     <label for="">Number of question </label>
-                    <input type="number" id="question_lenth" name="question_lenth" :value="old('question_lenth')" required 
+                    <input type="number" min="1" id="question_lenth" name="question_lenth" :value="old('question_lenth')" required 
                         class="block mt-1 w-full"
                     />
+                    @error('question_lenth')
+                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                    @enderror
 
                     <label for="">Set time (minutes)</label>
                     <input type="number" min="1" id="time" name="time" :value="old('time')" required 
                         class="block mt-1 w-full"
                     />
+                    @error('time')
+                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                    @enderror
+
                     <button>Submit</button>
                 </div>
             </form>

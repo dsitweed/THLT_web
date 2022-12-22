@@ -23,7 +23,7 @@ use App\Http\Controllers\QuestionController;
 */
 
 Route::get('/test', function () {
-    return view('teacher.showAllExams');
+    return view('components.application-logo');
 });
 
 Route::get('/dashboard', function () {
@@ -44,6 +44,8 @@ require __DIR__.'/auth.php';
 /* Phần trên là mặc định của laravel và Breeze  */
 
 Route::get('/home', [HomeController::class, 'index']);
+
+
 
 
 Route::resource('/examinfo', ExaminfoController::class);

@@ -15,15 +15,19 @@
 ### 4. Các view
     - Landing page = login page (nếu chưa đăng nhập) - Đã xong
     // login, register, edit profile dùng của laravel 
+    - filter cũng đã xong 
     ##### 1. Giáo viên
     - Trang xem các đề thi của mình
-    - Trang xem các đề thi (Có bộ lọc)
+    - Thêm khóa học, Xem các khóa học  
+    - Trang xem các đề thi 
     - Trang chỉnh sửa đê thi (đã có - cần chỉnh cho đẹp hơn)
-    - Trang chỉnh sửa 1 câu (đã có) - Cái này có thể vứt di nhưng cần thiết kế phù hợp
+    - Trang chỉnh sửa 1 câu (đã có)
+    - Xem kết quả thi của học sinh
     - Home page (Thiết kế tùy sáng tạo)
     ##### 2. Học sinh
     - Home page
     - Trang xem các đề thi (Có bộ lọc)
+    - Đăng ký khóa học 
     - Trang làm bài thi (Đã có - chỉnh sửa cho đẹp hơn)
     - Trang xem kết quả sau khi thi xong
     - Trang xem tất cả các bài thi mình đã làm (có nút bấm -> trang xem kết quả 1 bài == trang xem kết quả sau thi xong)

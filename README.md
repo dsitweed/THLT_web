@@ -24,6 +24,8 @@ Các file cần sửa
     DB_DATABASE=/home/ky/PHP/final_project/database/db.sqlite
     DB_FOREIGN_KEYS=true
 - Tạo lại dữ liệu: php artisan migrate:refresh --seed
+### Nếu lỗi:
+- Xóa file db.sqlite
 
 Sửa lỗi không ghi được vào model bởi đc bảo vệ 
 Trong file: AppServiceProvider.php

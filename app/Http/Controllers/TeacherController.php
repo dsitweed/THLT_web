@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class TeacherController extends Controller
 {
 
-    public function showAllExams() {
+    public function showAllExams(Request $request) {
 
         $teacher = Teacher::where('user_id', Auth::user()->id)->get();
         if (count($teacher) != 1) {

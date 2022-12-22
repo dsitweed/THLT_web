@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
@@ -22,6 +23,10 @@ class CourseController extends Controller
 
     public function store(Request $request) {
         $teacher = Teacher::where('user_id', Auth::user()->id)->first();
+
+        $formField = $request->validate([
+            'course_name' => Rule::unique('courses', 'name')
+        ]);
 
         Course::create([
             'name' => $_POST['course_name'] ,

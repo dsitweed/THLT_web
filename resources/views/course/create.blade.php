@@ -10,6 +10,9 @@
             @csrf
 
             <label for=""> Course name</label>
+            @error('course_name')
+                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+            @enderror
             <input type="text" name="course_name" required>
             <label for="">Course descripton</label>
             <input type="text" name="course_description" required>

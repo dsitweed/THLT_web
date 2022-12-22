@@ -29,19 +29,23 @@
                 <input type="text" id="search-navbar" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search...">
             </div>
             <div class="">
-                <form id="filter" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+                <form class="flex flex-row" id="filter" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
                     <select name="filterSubject" id="" data-palaceholder="Filters"
-                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                    >
+                    class="block min-w-fit bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    >   
+                    <option <?php if (isset($_GET['filterSubject'])) echo 'hidden' ?> selected >{{isset($_GET['filterSubject']) ? $_GET['filterSubject'] : "Select"}}</option>
                         @foreach ($subject as $item)
-                            <option value="{{$item->name}}"
-                                class=""    
-                            > 
-                                {{strtoupper($item->name)}}
+                            <option value="{{$item->name}}"> 
+                                {{$item->name}}
                             </option>
                         @endforeach
                     </select>
-                    <button class="border-2 border-black p-2" type="submit">filter</button>
+                    <button 
+                    class="bg-gray-50 ml-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        type="submit"
+                    >
+                        filter
+                    </button>
                 </form>
             </div>
         </div>
@@ -55,7 +59,6 @@
                         <th class="{{$thClass}}">Exam name</th>
                         <th class="{{$thClass}}">Course Id</th>
                         <th class="{{$thClass}}">Course name</th>
-                        <th class="{{$thClass}}">Uniqueid of Exam</th>
                         <th class="{{$thClass}}">Question number</th>
                         <th class="{{$thClass}}">Time</th>
                         <th class="{{$thClass}}">Edit</th>
@@ -69,7 +72,6 @@
                             <td class="{{$tdClass}}">{{$item->name}}</td>
                             <td class="{{$tdClass}}">{{$item->course_id}}</td>
                             <td class="{{$tdClass}}">{{$item->course_name}}</td>
-                            <td class="{{$tdClass}}">{{$item->uniqueid}}</td>
                             <td class="{{$tdClass}}">{{$item->question_lenth}}</td>
                             <td class="{{$tdClass}}">{{$item->time}} minute</td>
                             <td class="{{$tdClass}}">
