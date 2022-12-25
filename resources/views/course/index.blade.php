@@ -7,21 +7,25 @@
 @endphp
 
 @section('content')
-    <div>
-        <table class="table-auto">
+    <div class="mx-2">
+        <table class="table-fixed w-full border border-spacing-2 border-collapse border-slate-400">
             <thead>
+                <?php $thClass = "border p-2 border-slate-400" ?>
                 <tr>
-                    <th>Course id</th>
-                    <th>Course name</th>
-                    <th>Description</th>
+                    <th class="{{$thClass}}">ID khóa học</th>
+                    <th class="{{$thClass}}">Tên khóa học</th>
+                    <th class="{{$thClass}}">Miêu tả khóa học</th>
+                    {{-- <th class="{{$thClass}}">Số học sinh đang tham gia</th> --}}
                 </tr>
             </thead>
             <tbody>
+                <?php $tdClass = "text-center border border-slate-400 p-2" ?>
                 @foreach ($listCourse as $item)
                     <tr>
-                        <td>{{$item->id}}</td>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->description}}</td>
+                        <td class="{{$tdClass}}">{{$item->id}}</td>
+                        <td class="{{$tdClass}}">{{$item->name}}</td>
+                        <td class="{{$tdClass}}">{{$item->description}}</td>
+                        <td class="{{$tdClass}}">{{$item->description}}</td>
                     </tr>
                 @endforeach
             </tbody>

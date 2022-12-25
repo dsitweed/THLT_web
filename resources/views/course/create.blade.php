@@ -9,14 +9,17 @@
         >
             @csrf
 
-            <label for=""> Course name</label>
+            <label class="my-2" for=""> Course name</label>
             @error('course_name')
                 <p class="text-red-500 text-xs mt-1">{{$message}}</p>
             @enderror
-            <input type="text" name="course_name" required>
-            <label for="">Course descripton</label>
-            <input type="text" name="course_description" required>
-            <button name="submit" type="submit">Save</button>
+            <input class="border border-black p-2 rounded-md" type="text" name="course_name" required>
+           
+            <label class="my-2" for="">Course descripton</label>
+            <input class="border border-black p-2 rounded-md" type="text" name="course_description" required>
+            <button name="submit" type="submit"
+                class="mt-4 bg-blue-700 text-white text-2xl w-2/6 m-auto p-1 rounded-md text-"
+            >Save</button>
         </form>
         
     </div>

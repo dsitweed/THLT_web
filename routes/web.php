@@ -23,7 +23,7 @@ use App\Http\Controllers\QuestionController;
 */
 
 Route::get('/test', function () {
-    return view('components.application-logo');
+    return view('makequestion.create');
 });
 
 Route::get('/dashboard', function () {
