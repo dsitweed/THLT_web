@@ -26,9 +26,6 @@ class questionController extends Controller
 
     public function store(Request $request)
     {
-        //
-        $question= new Question;
-
         $question = Question::create([
                 'exam_id' => $request->input('examId'),
                 'question' => $request->input('question'),
@@ -37,10 +34,10 @@ class questionController extends Controller
                 'choice3' => $request->input('option3'),
                 'choice4' => $request->input('option4'),
                 'answer' => $request->input('answer')
+        ]);
 
-            ]);
 
-        $id = $request->input('examId');
+        $id = $question->exam_id;
 
         $questionCount = Question::where('exam_id','=', $id)->count();
 
@@ -49,10 +46,10 @@ class questionController extends Controller
 
         if ($questionCount < $selectLength ) {
             $examinfo = Examinfo::find($id);
-            return view('makequestion.create', ['examinfo' => $examinfo]);
+            return view('makequestion.create', ['examinfo' => $examinfo, 'questionCount' => $questionCount + 1]);
         }else{
-            $examinfo = Examinfo::where('id','=',$id)->get();
-            return view('makequestion.index',['examinfo' => $examinfo[0]]);
+            $examinfo = Examinfo::find($id);
+            return view('makequestion.index',['examinfo' => $examinfo]);
 
         }
 

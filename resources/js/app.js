@@ -1,4 +1,4 @@
-import '@fontsource/be-vietnam-pro'
+// import '@fontsource/be-vietnam-pro'
 import './bootstrap';
 import Alpine from 'alpinejs';
 

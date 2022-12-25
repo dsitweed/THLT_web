@@ -37,73 +37,23 @@ class ExaminfoController extends Controller
      */
     public function store(Request $request)
     {
-        $teacher = Teacher::where('user_id', $request->input('user_id'))->get();
-        if (count($teacher) != 1) {
-            return view(abort(403));
-        }
+        $teacher = Teacher::where('user_id', $request->input('user_id'))->first();
+       
         $formField = $request->validate([
             'name' => Rule::unique('examInfos', 'name'),
             'question_lenth' => ['integer' ,'gt:0'],
-            'time' => ['integer', 'gt:0']
+            'time' => ['integer', 'gt:0'],
+            'user_id' => ['required']
         ]);
-        
-
-        // Thiếu validate dữ liệu ở đây
-        // đang lỗi nếu nhập not unique name của exam 
 
         $examinfo = Examinfo::create([
                 'name' => $request->input('name'),
-                'teacher_id' => $teacher[0]->id,
+                'teacher_id' => $teacher->id,
                 'course_id' => $request->input('course_id'),
                 'question_lenth' => $request->input('question_lenth'),
                 'time' => $request->input('time')
             ]);
-
         return view('makequestion.create', ['examinfo' => $examinfo]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
