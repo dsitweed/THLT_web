@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('course_id')->constrained('Courses');
             $table->integer('question_lenth');
             $table->string('time');
-            
+
             $table->timestamps();
         });
     }

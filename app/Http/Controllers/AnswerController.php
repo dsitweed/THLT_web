@@ -17,14 +17,14 @@ class AnswerController extends Controller
         $question_id = $_POST['question_id']; // Array
 
         $true_answer = $_POST['true_answer']; // Array
-        $given_answer = []; 
-        
+        $given_answer = [];
+
         for ($i = 0; $i < sizeof($true_answer); $i++) {
             $cmp = "answer" . $i;
             if (isset($_POST[$cmp])) $given_answer[] = $_POST[$cmp];
         }
 
-        // chưa báo được lỗi khi không trả lời đủ câu hỏi 
+        // chưa báo được lỗi khi không trả lời đủ câu hỏi
         if (count($true_answer) != count($given_answer)) {
             return redirect(url()->previous())->with('error', "not answer full");
         }
@@ -42,18 +42,16 @@ class AnswerController extends Controller
             'score' => $score,
         ]);
 
-
         foreach ($question_id as $key => $value) {
             $answer = Answer::create([
                 'student_id' => $student_id,
                 'question_id' => $value,
                 'exam_id' => $exam_id,
                 'result_id' => $result->id,
-                'given_answer' => $true_answer[$key]
+                'given_answer' => $given_answer[$key]
             ]);
         }
 
         return redirect('/');
     }
-
 }

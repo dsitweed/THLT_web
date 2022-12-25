@@ -33,8 +33,11 @@ class ResultController extends Controller
         ]);
     }
 
-    public function show($result_id) {
-        $score = Result::find($result_id)->value('score');
+    public function show($result_id)
+    {
+        $result = Result::where('id', $result_id)->get();
+        $score = $result->value('score');
+        $max_score = Examinfo::where('id', $result->value('exam_id'))->value('question_lenth');
         $resultDetail = Answer::where('result_id', $result_id)->get();
         foreach ($resultDetail as $key => $value) {
             $question = Question::find($value->question_id);
@@ -48,6 +51,7 @@ class ResultController extends Controller
         return view('result.show', [
             'resultDetail' => $resultDetail,
             'score' => $score,
+            'maxScore' => $max_score
         ]);
     }
 }
