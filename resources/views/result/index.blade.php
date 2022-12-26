@@ -96,29 +96,5 @@
                 </tbody>
             </table>
         </div>
-
-        {{-- pagination  --}}
-        <div class="pagination flex justify-between my-5 items-center">
-            <div>
-                <p>Showing 1 to <strong>10</strong> of <strong>30</strong> results</p>
-            </div>
-            <div>
-                <a class="border-gray-300 border focus:border-indigo-500 rounded-md shadow-sm border-solid p-3"
-                    href="#">
-                    &laquo;
-                </a>
-                {{-- {{$listExams->links()}} --}}
-                @for ($i = 1; $i < 4; $i++)
-                    <a class="border-gray-300 border border-collapse active:bg-slate-400 focus:border-indigo-500 rounded-md shadow-sm justify-center items-center border-solid p-3"
-                        href="#">
-                        {{ $i }}
-                    </a>
-                @endfor
-                <a class="border border-gray-300 focus:border-indigo-500 rounded-md shadow-sm justify-center border-solid p-3"
-                    href="#">
-                    &raquo;
-                </a>
-            </div>
-        </div>
     </div>
 @endsection
