@@ -48,7 +48,8 @@
                         </option>
                         @foreach ($subject as $item)
                             <option value="{{ $item->name }}"
-                                {{ $_GET['filterSubject'] == $item->name ? 'selected' : '' }} class="">
+                                {{ isset($_GET['filterSubject']) && $_GET['filterSubject'] == $item->name ? 'selected' : '' }}
+                                class="">
                                 {{ $item->name }}
                             </option>
                         @endforeach
@@ -62,7 +63,7 @@
         <div class="my-6 bg-white mx-4">
             <table class="w-full">
                 <thead>
-                    <?php $thClass = 'bg-blue-400 text-white px-4 py-3'; ?>
+                    <?php $thClass = 'bg-yellow-400 text-white px-4 py-3'; ?>
                     <tr class="text-md font-semibold">
                         <th class="{{ $thClass }}">Bài thi</th>
                         <th class="{{ $thClass }}">Khóa học</th>
@@ -75,7 +76,7 @@
                 <tbody>
                     <?php $tdClass = 'text-center px-4 py-3'; ?>
                     @foreach ($listExams as $item)
-                        <tr class="hover:bg-blue-100">
+                        <tr class="hover:bg-yellow-100">
                             <td class="{{ $tdClass }}">{{ $item->name }}</td>
                             <td class="{{ $tdClass }}">{{ $item->course_name }}</td>
                             <td class="{{ $tdClass }}">{{ $item->teacher_name }}</td>
@@ -83,7 +84,7 @@
                             <td class="{{ $tdClass }}">{{ $item->time }} phút</td>
                             <td class="{{ $tdClass }}">
                                 <form action="/student/do-exam/{{ $item->id }}" method="get">
-                                    <button class="bg-blue-600 text-white p-2 rounded-lg" type="submit">Làm bài</button>
+                                    <button class="bg-yellow-400 text-white p-2 rounded-lg" type="submit">Làm bài</button>
                                 </form>
                             </td>
                         </tr>

@@ -58,7 +58,7 @@
         <div class="my-6 bg-white mx-4">
             <table class="w-full">
                 <thead class="">
-                    <?php $thClass = 'bg-blue-400 text-white px-4 py-3'; ?>
+                    <?php $thClass = 'bg-yellow-400 text-white px-4 py-3'; ?>
                     <tr class="text-md font-semibold">
                         <th class="{{ $thClass }}">Bài thi</th>
                         <th class="{{ $thClass }}">Thời gian</th>
@@ -73,7 +73,7 @@
                 <tbody>
                     <?php $tdClass = 'text-center px-4 py-3'; ?>
                     @foreach ($listResult as $item)
-                        <tr class="hover:bg-blue-100">
+                        <tr class="hover:bg-yellow-100">
                             <td class="{{ $tdClass }}">{{ $item->exam_name }}</td>
                             <td class="{{ $tdClass }}">{{ $item->exam_time }} minute</td>
                             <td class="{{ $tdClass }}">{{ $item->course_name }}</td>
@@ -86,7 +86,7 @@
                             <td class="{{ $tdClass }}">
                                 {{-- send result_id --}}
                                 <form action="{{ route('result.show', [$item->id]) }}" method="get">
-                                    <button class="bg-blue-600 text-white p-2 rounded-lg" type="submit">
+                                    <button class="bg-yellow-400 text-white p-2 rounded-lg" type="submit">
                                         Xem
                                     </button>
                                 </form>
