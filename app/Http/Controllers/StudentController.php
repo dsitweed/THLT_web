@@ -18,21 +18,30 @@ class StudentController extends Controller
    public function showAllExams() {
     // Sau này sẽ lấy tất cả những bài test ở các khóa học mà học sinh đã đăng ký 
     // dd(Auth::user()->name);
-    // $user_id = Auth::user()->id;
+    $user_id = Auth::user()->id;
 
-    $listExams = Examinfo::all();
+    $listExams = [];
+    $joinedCourses = JoinCourse::where('student_id', $user_id)->get();
+    // 
+    foreach ($joinedCourses as $key => $value) {
+        $tmp = Examinfo::where('course_id', $value->course_id)->get();
+        foreach ($tmp as $i => $item) {
+            $listExams[] = $item;
+        }
+    }
 
     foreach ($listExams as $key => $value) {
         $course = Course::find($value->course_id);
         $listExams[$key]->course_name = $course->name;
     }
-
+    
     foreach ($listExams as $key => $value) {
         $teacher = Teacher::find($value->teacher_id);
         $user_teacher = User::find($teacher->user_id);
         $listExams[$key]->teacher_name = $user_teacher->name;
     }
-
+    
+    // dd($listExams);
     return view('student.showAllExams', ['listExams' => $listExams]);
    }
    

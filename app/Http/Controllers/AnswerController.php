@@ -11,6 +11,7 @@ class AnswerController extends Controller
 {
     public function store(Request $request)
     {
+        date_default_timezone_set('Asia/Ho_Chi_Minh'); // Set tham zone lưu thời gian cho chuẩn 
 
         $student_id = $_POST['student_id']; // 1
         $exam_id = $_POST['exam_id']; // 1

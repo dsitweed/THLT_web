@@ -2,7 +2,7 @@
 
 {{--
     Sẽ nhận được 1 array đủ các thông tin ở dưới đặt tạm tên là $listExams
-    từ teacherController
+    từ studentController
  --}}
 @php
     // dd($listExams);
