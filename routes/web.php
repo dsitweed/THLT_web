@@ -62,12 +62,15 @@ Route::resource('/result', ResultController::class);
 Route::controller(StudentController::class)->group(function () {
     Route::get('student/show-all-exams', 'showAllExams')->name('student.show-all-exams');
     Route::get('student/do-exam/{exam_id}', 'doExam')->name('student.do-exam');
+    Route::get('student/join-course', 'joinCourse')->name('student.join-course');
+    Route::post('student/join-course', 'joinCourseSave');
 });
 
 
 Route::controller(TeacherController::class)->group(function () {
     Route::get('teacher/show-all-exams', 'showAllExams')->name('teacher.show-all-exams');
     Route::get('teacher/show-student-result/{exam_id}', 'showStudentResult')->name('teacher.show-student-result');
+    Route::post('teacher/show-student-result-detail', 'showStudentResultDetail')->name('teacher.show-student-result-detail');
 });
 
 Route::controller(CourseController::class)->group(function () {

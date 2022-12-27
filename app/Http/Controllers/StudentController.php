@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Examinfo;
 use App\Models\Question;
+use App\Models\JoinCourse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -87,5 +88,31 @@ class StudentController extends Controller
         
 
         //return $this->show($request->input('exam_code'));
+    }
+
+    public function joinCourse() {
+        $listCourse = Course::all();
+        foreach ($listCourse as $key => $value) {
+            $teacher = Teacher::find($value->teacher_id);
+            $teacher_name = User::where('id', $teacher->user_id)->value('name');
+            $listCourse[$key]->teacher_name = $teacher_name;
+            
+            $number_student = JoinCourse::where('course_id', $value->id)->get()->count();
+            $listCourse[$key]->number_student = $number_student;
+        }
+
+        $joinedCourses = joinCourse::where('student_id', Auth::user()->id)->get();
+        return view('student.joinCourse', [
+            'listCourse' => $listCourse,
+            'joinedCourses' => $joinedCourses,
+        ]);
+    }
+
+    public function joinCourseSave(Request $request) {
+        JoinCourse::create([
+            'course_id' => $request->course_id,
+            'student_id' => $request->student_id
+        ]);
+        return redirect('/');
     }
 }
