@@ -13,6 +13,8 @@
         foreach ($listExams as $key => $value) {
             if ($value->course_name == $subjectFilter) {
                 $tmp[] = $value;
+            } elseif ($subjectFilter == 'Khóa học' || $subjectFilter == '') {
+                $tmp[] = $value;
             }
         }
         $listExams = $tmp;
@@ -34,25 +36,26 @@
                 </div>
                 <input type="text" id="search-navbar"
                     class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Search...">
+                    placeholder="Tìm kiếm...">
             </div>
             <div class="fleter_div">
                 <form id="filter" class="flex flex-row" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get"
                     class="block min-w-fit bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <select name="filterSubject" id="" data-palaceholder="Filters"
-                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                        <option <?php if (isset($_GET['filterSubject'])) {
-                            echo 'hidden';
-                        } ?> selected>
-                            {{ isset($_GET['filterSubject']) ? $_GET['filterSubject'] : 'Select' }}</option>
+                        class="border-gray-300 focus:border-indigo-500 form-select focus:ring-indigo-500 rounded-md shadow-sm">
+                        <option value="">
+                            Khóa học
+                        </option>
                         @foreach ($subject as $item)
-                            <option value="{{ $item->name }}" class="">
+                            <option value="{{ $item->name }}"
+                                {{ isset($_GET['filterSubject']) && $_GET['filterSubject'] == $item->name ? 'selected' : '' }}
+                                class="">
                                 {{ $item->name }}
                             </option>
                         @endforeach
                     </select>
                     <button type="submit"
-                        class="bg-gray-50 ml-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">filter</button>
+                        class="bg-gray-50 ml-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">Lọc</button>
                 </form>
             </div>
         </div>
@@ -60,7 +63,7 @@
         <div class="my-6 bg-white mx-4">
             <table class="w-full">
                 <thead>
-                    <?php $thClass = 'bg-blue-400 text-white px-4 py-3'; ?>
+                    <?php $thClass = 'bg-yellow-400 text-white px-4 py-3'; ?>
                     <tr class="text-md font-semibold">
                         <th class="{{ $thClass }}">Bài thi</th>
                         <th class="{{ $thClass }}">Khóa học</th>
@@ -73,7 +76,7 @@
                 <tbody>
                     <?php $tdClass = 'text-center px-4 py-3'; ?>
                     @foreach ($listExams as $item)
-                        <tr class="hover:bg-blue-100">
+                        <tr class="hover:bg-yellow-100">
                             <td class="{{ $tdClass }}">{{ $item->name }}</td>
                             <td class="{{ $tdClass }}">{{ $item->course_name }}</td>
                             <td class="{{ $tdClass }}">{{ $item->teacher_name }}</td>
@@ -81,36 +84,13 @@
                             <td class="{{ $tdClass }}">{{ $item->time }} phút</td>
                             <td class="{{ $tdClass }}">
                                 <form action="/student/do-exam/{{ $item->id }}" method="get">
-                                    <button class="bg-blue-600 text-white p-2 rounded-lg" type="submit">Làm bài</button>
+                                    <button class="bg-yellow-400 text-white p-2 rounded-lg" type="submit">Làm bài</button>
                                 </form>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-
-        </div>
-        <div class="pagination flex justify-between my-5 items-center">
-            <div>
-                <p>Showing 1 to <strong>10</strong> of <strong>30</strong> results</p>
-            </div>
-            <div>
-                <a class="border-gray-300 border focus:border-indigo-500 rounded-md shadow-sm border-solid p-3"
-                    href="#">
-                    &laquo;
-                </a>
-                {{-- {{$listExams->links()}} --}}
-                @for ($i = 1; $i < 4; $i++)
-                    <a class="border-gray-300 border border-collapse active:bg-slate-400 focus:border-indigo-500 rounded-md shadow-sm justify-center items-center border-solid p-3"
-                        href="#">
-                        {{ $i }}
-                    </a>
-                @endfor
-                <a class="border border-gray-300 focus:border-indigo-500 rounded-md shadow-sm justify-center border-solid p-3"
-                    href="#">
-                    &raquo;
-                </a>
-            </div>
         </div>
     </div>
 @endsection
