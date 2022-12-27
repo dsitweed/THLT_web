@@ -33,15 +33,16 @@
     - Trang xem tất cả các bài thi mình đã làm (có nút bấm -> trang xem kết quả 1 bài == trang xem kết quả sau thi xong)
 
 ### Thắc mắc
-- Uniqueid dùng để làm gì 
 - tại sao khi tạo exam trong đường dẫn /examinfo/create -> ấn submit -> gửi đến controller route(examinfo.store) -> gửi tới view(makequestion.create). Đáng lẽ URL = makequestion/create tại sao lại hiển thị examinfo 
 - Làm bài test là view(answer.show) 
-### 
-exam code: JWU7r, 5619y, 6DNYy
-### BUG 
+### BUG
 - Sửa lại phần edit exam, ở view(makequestion.edit)
 - Nếu exam có 0 question -> lỗi ở $questions = $_POST['question']; bên controller 
-
+### Cần hoàn thiện
+- xem bài thì, sửa bài thi (dùng 1 mẫu)
+- Xem chi tiết bài thi của học sinh 
+- Xem khóa học có bao nhiêu học sinh // chưa cài database
+- cài pagation
 
 ## 5. Cập nhật
 - thêm thời gian hoàn thành bài thi của học sinh trong bảng result

@@ -21,9 +21,8 @@ class TeacherController extends Controller
             return abort(403);
         }
 
-        $listExams = Examinfo::where('teacher_id', $teacher[0]->id)->get()->paginate(10);
+        $listExams = Examinfo::where('teacher_id', $teacher[0]->id)->get();
         
-        dd($listExams);
         foreach($listExams as $key => $value) {
             $course = Course::find($value->course_id);
             $listExams[$key]->course_name = $course->name; 
