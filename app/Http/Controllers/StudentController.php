@@ -100,7 +100,15 @@ class StudentController extends Controller
     }
 
     public function joinCourse() {
-        $listCourse = Course::all();
+        // Lấy toàn bộ khóa học public và các khóa học private đã đăng ký
+        $listCourse = Course::where('privacy', 'public')->get();
+        $joinedCourses = joinCourse::where('student_id', Auth::user()->id)->get();
+        foreach ($joinedCourses as $key => $value) {
+            $course = Course::find($value->course_id);
+            if ($course->privacy == 'private') $listCourse[] = $course;
+        }
+
+        // Lấy thêm các thông tin bổ sung khác để hiển thị trên màn hình
         foreach ($listCourse as $key => $value) {
             $teacher = Teacher::find($value->teacher_id);
             $teacher_name = User::where('id', $teacher->user_id)->value('name');
@@ -110,7 +118,6 @@ class StudentController extends Controller
             $listCourse[$key]->number_student = $number_student;
         }
 
-        $joinedCourses = joinCourse::where('student_id', Auth::user()->id)->get();
         return view('student.joinCourse', [
             'listCourse' => $listCourse,
             'joinedCourses' => $joinedCourses,
@@ -123,5 +130,21 @@ class StudentController extends Controller
             'student_id' => $request->student_id
         ]);
         return redirect('/');
+    }
+
+    public function joinCoursePrivateSave(Request $request) {
+        if (isset($_POST['code'])) {
+            $student_id = $request->student_id;
+            $course = Course::where('code', $_POST['code'])->first();
+            if ($course) {
+                JoinCourse::create([
+                    'course_id' => $course->code,
+                    'student_id' => $student_id
+                ]);
+                return redirect('/');
+            } else {// not have course
+                return redirect('/');
+            }
+        }
     }
 }

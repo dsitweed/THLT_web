@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longText('description');
+            $table->longText('privacy');
+            $table->longText('code')->nullable();
             $table->foreignId('teacher_id')->constrained('teachers');
             $table->timestamps();
         });

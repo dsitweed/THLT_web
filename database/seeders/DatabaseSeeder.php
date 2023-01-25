@@ -57,7 +57,8 @@ class DatabaseSeeder extends Seeder
             "name" => 'Math',
             'description' => "Just for test",
             'teacher_id' => 1,
-
+            'privacy' => 'public',
+            'code' => null,
         ]);
     }
 }

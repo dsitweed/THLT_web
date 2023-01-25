@@ -16,6 +16,15 @@
 
 @section('content')
     <div>
+        <div class="flex flex-col justify-center items-center mt-4">
+            <h1>Đăng ký khóa học private bằng code</h1>
+            <form action="/student/join-course-private" method="post" class="flex">
+                @csrf
+                <input type="text" name="code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                <input type="hidden" name="student_id" value="{{Auth::user()->id}}">
+                <button class="bg-slate-600 text-white p-2 rounded-lg" type="submit">Đăng ký</button>
+            </form>
+        </div>
         <div>
             <h2 class="text-4xl font-semibold my-3 text-center">Đăng ký khoá học</h2>
         </div>
@@ -27,6 +36,8 @@
                         <th class="{{ $thClass }}">Khóa học</th>
                         <th class="{{ $thClass }}">Giáo viên</th>
                         <th class="{{ $thClass }}">Miêu tả</th>
+                        <th class="{{ $thClass }}">Loại</th>
+                        <th class="{{ $thClass }}">Code</th>
                         <th class="{{ $thClass }}">Số học sinh</th>
                         <th class="{{ $thClass }}">Đăng ký</th>
                     </tr>
@@ -38,12 +49,14 @@
                             <td class="{{ $tdClass }}">{{ $item->name }}</td>
                             <td class="{{ $tdClass }}">{{ $item->teacher_name }}</td>
                             <td class="{{ $tdClass }}">{{ $item->description}}</td>
+                            <td class="{{ $tdClass }}">{{ $item->privacy}}</td>
+                            <td class="{{ $tdClass }}">{{ $item->code}}</td>
                             <td class="{{ $tdClass }}">{{ $item->number_student}} người</td>
                             <td class="{{ $tdClass }}">
                                 <form action="/student/join-course/" method="post">
+                                    @csrf
                                     <input type="hidden" name="course_id" value="{{$item->id}}">
                                     <input type="hidden" name="student_id" value="{{Auth::user()->id}}">
-                                    @csrf
                                     @if (inArray($item->id, $joinedCourses))
                                         <button class="bg-slate-300 text-black p-2 rounded-lg" type="submit" disabled>Đã đăng ký</button>
                                     @else

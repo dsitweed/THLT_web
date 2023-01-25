@@ -64,6 +64,7 @@ Route::controller(StudentController::class)->group(function () {
     Route::get('student/do-exam/{exam_id}', 'doExam')->name('student.do-exam');
     Route::get('student/join-course', 'joinCourse')->name('student.join-course');
     Route::post('student/join-course', 'joinCourseSave');
+    Route::post('student/join-course-private', 'joinCoursePrivateSave');
 });
 
 

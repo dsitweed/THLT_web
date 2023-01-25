@@ -1,5 +1,6 @@
 <x-guest-layout>
     <x-auth-card>
+        
         <x-slot name="logo">
             <a href="/">
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
@@ -8,6 +9,18 @@
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
+        <div class="flex justify-end w-full 123">
+            
+        </div>
+        <div class="flex items-center justify-end mt-4">
+            <p class="text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                {{ __('If not have account') }}
+            </p>
+
+            <x-primary-button class="ml-3">
+                <a href=" {{ route('register') }}">Register</a>
+            </x-primary-button> 
+        </div>
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -54,9 +67,8 @@
                     {{ __('Log in') }}
                 </x-primary-button>
             </div>
+            
         </form>
-        <x-primary-button class="ml-3">
-            <a href=" {{ route('register') }}">Register</a>
-        </x-primary-button>
+        
     </x-auth-card>
 </x-guest-layout>

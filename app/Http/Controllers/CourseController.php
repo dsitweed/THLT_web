@@ -27,10 +27,13 @@ class CourseController extends Controller
         $formField = $request->validate([
             'course_name' => Rule::unique('courses', 'name')
         ]);
-
+        $bytes = random_bytes(5);
+        $randomCode = bin2hex($bytes);
         Course::create([
             'name' => $_POST['course_name'] ,
             'description' => $_POST['course_description'],
+            'privacy' => $_POST['privacy'],
+            'code' =>  ($_POST['privacy'] == 'private' ? $randomCode : null),
             'teacher_id' => $teacher->id,
         ]);        
 

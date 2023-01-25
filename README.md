@@ -23,7 +23,10 @@ Các file cần sửa
     DB_CONNECTION=sqlite
     DB_DATABASE=/home/ky/PHP/final_project/database/db.sqlite
     DB_FOREIGN_KEYS=true
-- Tạo lại dữ liệu: php artisan migrate:refresh --seed
+- Tạo lại dữ liệu:
+```
+php artisan migrate:refresh --seed
+```
 ### Nếu lỗi:
 - Xóa file db.sqlite
 
