@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 {{-- $listPost  from CourseController 
+    $listPost gồm các trường:
+    các trường của Post như db
+    thêm trường listReply - là list Reply như db
+    thêm trường owner - tên của người viết cái post này (tại sao ko để owner_name ? vì nghĩ sau này sẽ mở rộng ra, hoặc là đéo.)
 --}}
 @php
     $slice = explode('/',Request::url());
