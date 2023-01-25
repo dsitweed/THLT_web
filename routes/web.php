@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ExaminfoController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\QuestionController;
 
 /*
@@ -46,8 +47,6 @@ require __DIR__.'/auth.php';
 Route::get('/home', [HomeController::class, 'index']);
 
 
-
-
 Route::resource('/examinfo', ExaminfoController::class);
 Route::resource('/makequestion', QuestionController::class);
 Route::resource('/answer', AnswerController::class);
@@ -77,7 +76,13 @@ Route::controller(TeacherController::class)->group(function () {
 Route::controller(CourseController::class)->group(function () {
     Route::get('course/', 'index')->name('course.index');
     Route::get('course/create', 'create')->name('course.create');
+    Route::get('course/forum/{course_id}', 'showCourseForum')->name('course.forum');
     Route::post('course/store', 'store')->name('course.store');
+});
+
+Route::controller(PostController::class)->group(function () {
+    Route::post('post/store', 'store')->name('post.store');
+    Route::post('post/storeReply', 'storeReply')->name('post.storeReply');
 });
 
 /*

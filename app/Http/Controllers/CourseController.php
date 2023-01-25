@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Reply;
 use App\Models\Course;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
@@ -40,4 +43,18 @@ class CourseController extends Controller
         return redirect('/course');
     }
 
+    public function showCourseForum($course_id) {
+        $listPost = Post::where('course_id', $course_id)->get();
+        foreach ($listPost as $key => $value) {
+            $listReply = Reply::where('post_id', $value->id)->get();
+            $listPost[$key]->listReply = $listReply;    
+
+            $owner = User::find($value->user_id);
+            $listPost[$key]->owner = $owner->name;
+        }
+
+        return view('course.forum', [
+            "listPost" => $listPost,
+        ]);
+    }
 }

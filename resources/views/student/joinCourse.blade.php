@@ -46,7 +46,9 @@
                     <?php $tdClass = 'text-center px-4 py-3'; ?>
                     @foreach ($listCourse as $item)
                         <tr class="hover:bg-yellow-100">
-                            <td class="{{ $tdClass }}">{{ $item->name }}</td>
+                            <td class="{{ $tdClass }}">
+                                <a href="/course/forum/{{$item->id}}">{{ $item->name }}</a>
+                            </td>
                             <td class="{{ $tdClass }}">{{ $item->teacher_name }}</td>
                             <td class="{{ $tdClass }}">{{ $item->description}}</td>
                             <td class="{{ $tdClass }}">{{ $item->privacy}}</td>
