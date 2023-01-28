@@ -71,6 +71,7 @@ Route::controller(TeacherController::class)->group(function () {
     Route::get('teacher/show-all-exams', 'showAllExams')->name('teacher.show-all-exams');
     Route::get('teacher/show-student-result/{exam_id}', 'showStudentResult')->name('teacher.show-student-result');
     Route::post('teacher/show-student-result-detail', 'showStudentResultDetail')->name('teacher.show-student-result-detail');
+    Route::get('teacher/show-forum', 'showForum')->name('teacher.show-forum');
 });
 
 Route::controller(CourseController::class)->group(function () {
@@ -83,6 +84,11 @@ Route::controller(CourseController::class)->group(function () {
 Route::controller(PostController::class)->group(function () {
     Route::post('post/store', 'store')->name('post.store');
     Route::post('post/storeReply', 'storeReply')->name('post.storeReply');
+
+    // Thao tác với like
+    Route::post('post/add-like', 'addLikePost')->name('post.add-like');
+    Route::post('post/remove-like', 'removeLikePost')->name('post.remove-like');
+
 });
 
 /*

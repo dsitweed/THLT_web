@@ -9,6 +9,7 @@ use App\Models\Result;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Examinfo;
+use App\Models\JoinCourse;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -64,5 +65,21 @@ class TeacherController extends Controller
         $listResult->score = $score;
         $listResult->student_name = $student_name;
         return view('teacher.showStudentResultDetail', ['listResult' => $listResult]);
+    }
+
+    public function showForum() {
+        $user = Auth::user();
+        if ($user->role != 'teacher') return abort(403);
+        $teacherId = Teacher::where('user_id', $user->id)->value('id');
+        $listCourse = Course::where('teacher_id', $teacherId)->orWhere('privacy', 'public')->get();
+        foreach ($listCourse as $key => $value) {
+            $value['number_student'] = JoinCourse::where('course_id', $value->id)->count();
+
+            $tmp = Teacher::where('id', $value->teacher_id)->value('user_id');
+            $value['teacher_name'] = User::where('id', $tmp)->value('name');
+        }
+        return view('teacher.showForum',[
+            'listCourse' => $listCourse
+        ]);
     }
 }

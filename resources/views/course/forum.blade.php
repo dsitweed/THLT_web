@@ -9,7 +9,6 @@
 @php
     $slice = explode('/', Request::url());
     $course_id = $slice[count($slice) - 1];
-
 @endphp
 
 <script>
@@ -62,20 +61,24 @@
                     </div>
 
                     <div class="inline-flex w-full mt-2 text-slate-600">
-                        <button
-                            class="inline-flex items-center justify-center w-1/2 px-3 py-2 hover:bg-slate-100 text-sm font-semibold rounded">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-up"
-                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path
-                                    d="M7 11v8a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-7a1 1 0 0 1 1 -1h3a4 4 0 0 0 4 -4v-1a2 2 0 0 1 4 0v5h3a2 2 0 0 1 2 2l-1 5a2 3 0 0 1 -2 2h-7a3 3 0 0 1 -3 -3">
-                                </path>
-                            </svg>
-                            <span class="ml-2">
-                                Thích
-                            </span>
-                        </button>
+                        <div class="inline-flex items-center justify-center w-1/2 px-3 py-2 hover:bg-slate-100 text-sm font-semibold rounded">
+                            <form action="/post/add-like" method="post" class="my-auto">
+                                @csrf
+                                <input type="text" hidden value={{$item->id}} name="post_id">
+                                <button type="submit" class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-up"
+                                        width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path
+                                            d="M7 11v8a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-7a1 1 0 0 1 1 -1h3a4 4 0 0 0 4 -4v-1a2 2 0 0 1 4 0v5h3a2 2 0 0 1 2 2l-1 5a2 3 0 0 1 -2 2h-7a3 3 0 0 1 -3 -3">
+                                        </path>
+                                    </svg>
+                                    <span class="ml-2">{{$item->like}} Thích</span>
+                                </button>
+                            </form>
+                        </div>
+                        
                         <button
                             class="inline-flex items-center justify-center w-1/2 px-3 py-2 hover:bg-slate-100 text-sm font-semibold rounded"
                             onclick="toggleComment({{ $item->id }})">

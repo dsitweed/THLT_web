@@ -45,4 +45,14 @@ class PostController extends Controller
         ]);
         return redirect()->back();
     }
+
+    public function addLikePost(Request $request) {
+        Post::find($request->post_id)->increment('like', 1);
+        return redirect()->back();
+    }
+
+    public function removeLikePost(Request $request) {
+        Post::find($request->post_id)->decrement('like', 1);
+        return redirect()->back();
+    }
 }

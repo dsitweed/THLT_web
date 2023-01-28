@@ -9,6 +9,7 @@
             <a class="{{$button}}" href="{{route('examinfo.create')}}">Create new exams</a>
             <a class="{{$button}}" href="{{route('course.create')}}">Create new course</a>
             <a class="{{$button}}" href="{{route('course.index')}}">View all my course</a>
+            <a class="{{$button}}" href="{{route('teacher.show-forum')}}">View forum</a>
         </div>
         <div class="basis-2/3">right</div>
     </div>
