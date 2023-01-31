@@ -24,7 +24,7 @@ use App\Http\Controllers\QuestionController;
 */
 
 Route::get('/test', function () {
-    return view('makequestion.create');
+    return view('test');
 });
 
 Route::get('/dashboard', function () {
@@ -48,6 +48,7 @@ Route::get('/home', [HomeController::class, 'index']);
 
 
 Route::resource('/examinfo', ExaminfoController::class);
+Route::post('/examinfo/store-random-exam', [ExaminfoController::class, 'storeRandomExam']);
 Route::resource('/makequestion', QuestionController::class);
 Route::resource('/answer', AnswerController::class);
 Route::resource('/result', ResultController::class);

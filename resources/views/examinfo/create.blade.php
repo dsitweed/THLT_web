@@ -52,8 +52,11 @@
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
 
-                    <button
-                        class="mt-4 text-xl rounded-lg mx-auto w-2/6 bg-slate-300 text-green-600 p-3 font-bold">Submit</button>
+                    <div class="flex justify-center">
+                        <button type="submit" name="action" value="default" class="mt-4 text-xl rounded-lg mx-auto w-2/6 bg-slate-300 text-green-600 p-3 font-bold">Tạo đề thi thủ công</button>
+                        <button type="submit" name="action" value="random" class="mt-4 text-xl rounded-lg mx-auto w-2/6 bg-slate-300 text-green-600 p-3 font-bold">Tạo đề thi với câu hỏi ngẫu nhiên</button>
+                    </div>
+                    
                 </div>
             </form>
         </div>
