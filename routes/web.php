@@ -48,6 +48,10 @@ Route::get('/home', [HomeController::class, 'index']);
 
 
 Route::resource('/examinfo', ExaminfoController::class);
+Route::get('/examinfo', [ExaminfoController::class, function () {
+    return view('examinfo.createRandomQues');
+}])->name('examinfo.createRandomQues');
+
 Route::resource('/makequestion', QuestionController::class);
 Route::resource('/answer', AnswerController::class);
 Route::resource('/result', ResultController::class);

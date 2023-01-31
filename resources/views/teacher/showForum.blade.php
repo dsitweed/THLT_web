@@ -9,7 +9,7 @@
 @section('content')
     <div>
         <div>
-            <h2 class="text-4xl font-semibold my-3 text-center">Các nhóm chat</h2>
+            <h2 class="text-4xl font-semibold my-3 text-center">Các nhóm thảo luận</h2>
         </div>
         <div class="my-6 bg-white mx-4">
             <table class="w-full">

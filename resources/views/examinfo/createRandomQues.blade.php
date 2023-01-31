@@ -52,7 +52,7 @@
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
 
-                    <button class="mt-4 text-xl rounded-lg mx-auto w-2/6 bg-slate-300 text-green-600 p-3 font-bold">Tạo bài thi</button>
+                    <button class="mt-4 text-xl rounded-lg mx-auto w-2/6 bg-slate-300 text-green-600 p-3 font-bold">Tạo bài thi ngẫu nhiên </button>
                 </div>
             </form>
         </div>
