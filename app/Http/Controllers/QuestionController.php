@@ -28,6 +28,7 @@ class questionController extends Controller
     {
         $question = Question::create([
                 'exam_id' => $request->input('examId'),
+                'course_id' => $request->input('course_id'),
                 'question' => $request->input('question'),
                 'choice1' => $request->input('option1'),
                 'choice2' => $request->input('option2'),
@@ -50,9 +51,7 @@ class questionController extends Controller
         }else{
             $examinfo = Examinfo::find($id);
             return view('makequestion.index',['examinfo' => $examinfo]);
-
         }
-
     }
 
 

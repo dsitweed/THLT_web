@@ -19,7 +19,6 @@
         <h2 style="text-align: center;"><b>Hệ thống sẽ tự động chuyển hướng khi bạn điền đủ số lượng câu hỏi</b></h2>
         <form method="post" action="{{ route('makequestion.store') }} ">
             @csrf
-
             <div class="">
                 <div class="flex flex-col">
                     <label class="" for="formGroupExampleInput">Câu hỏi số:
@@ -51,9 +50,10 @@
                     <label class="col-form-label" for="formGroupExampleInput2">Đáp án đúng</label>
                     <input type="text" name="answer" class="{{ $inputClass }}" id="formGroupExampleInput2" required>
                 </div>
-                {{-- Có thể ẩn label exam ID khi thiết kế giao diện đang để hiện cho dễ test  --}}
                 <input type="hidden" name="examId" class="form-control" id="formGroupExampleInput2"
                     value="{{ $examinfo->id }}" readonly>
+                <input type="hidden" name="course_id" class="form-control" id="formGroupExampleInput2"
+                value="{{ $examinfo->course_id }}" readonly>
             </div>
             <button type="Submit" class="p-2 mt-4 rounded-md font-medium w-full text-lg bg-slate-500">Xác nhận</button>
         </form>
