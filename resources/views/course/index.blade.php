@@ -39,18 +39,8 @@
                         @endphp
                         </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <?php $tdClass = 'text-center px-4 py-3'; ?>
-                    @foreach ($listCourse as $item)
-                        <tr class="hover:bg-yellow-100">
-                            <td class="{{ $tdClass }}">{{ $item->id }}</td>
-                            <td class="{{ $tdClass }}">{{ $item->name }}</td>
-                            <td class="{{ $tdClass }}">{{ $item->description }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 @endsection
