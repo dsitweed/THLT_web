@@ -3,7 +3,9 @@
 {{-- Nhận 1 biến $listCourse array kiểu Model Course --}}
 
 @php
-    if (!isset($listCourse)) $listCourse = [];
+    if (!isset($listCourse)) {
+        $listCourse = [];
+    }
 @endphp
 
 @section('content')
@@ -37,8 +39,18 @@
                         @endphp
                         </td>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php $tdClass = 'text-center px-4 py-3'; ?>
+                    @foreach ($listCourse as $item)
+                        <tr class="hover:bg-yellow-100">
+                            <td class="{{ $tdClass }}">{{ $item->id }}</td>
+                            <td class="{{ $tdClass }}">{{ $item->name }}</td>
+                            <td class="{{ $tdClass }}">{{ $item->description }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection

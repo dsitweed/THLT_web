@@ -53,6 +53,6 @@ class AnswerController extends Controller
             ]);
         }
 
-        return redirect('/');
+        return redirect("/result/$result->id");
     }
 }
