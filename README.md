@@ -3,6 +3,7 @@
 
 ## **[Link database design](https://dbdiagram.io/d/638a088dbae3ed7c45445a4c)**
 
+## [Link slide báo cáo](https://docs.google.com/presentation/d/1qv1rexb1-IP0O_L8GMwQiLrM2BSWiqJmWmQPQSBCbkY/edit?usp=sharing)
 
 ### Cấu hình yêu cầu
 #### Đây là cấu hình tại máy của tôi (Kỳ)
@@ -26,14 +27,13 @@ có thể lấy bằng gõ pwd ở terminal -->
 ```
 php artisan migrate
 ```
-## Các công nghệ sử dụng, họă đã cài đặt mặc định
+## Các công nghệ sử dụng, họăc đã cài đặt mặc định
 - Laravel
-- React
 - breeze (của laravel -> tạo form login logout đơn giản + chỉnh sửa profile)
 - Tailwindcss (Để thay cho css thuần - mặc định khi cài Breeze)
 - axios 
 - inertiajs (Để có thể sử dụng react + laravel)
-- Vite (để build front end nhanh tiện - không cần quan tâm)
+- Vite 
 
 ## Cài đặt lần đầu khi clone về
 ```
