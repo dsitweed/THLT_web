@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Listing;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AnswerController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\QuestionController;
 |
 */
 
+
 Route::get('/test', function () {
     return view('test');
 });
@@ -33,7 +35,11 @@ Route::get('/dashboard', function () {
 
 
 Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
-
+Route::get('/',function(){
+    return view('listings',[
+        'listings'=> Listing::all()
+    ]);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

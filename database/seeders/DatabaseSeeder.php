@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Listing;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Student;
@@ -60,5 +61,6 @@ class DatabaseSeeder extends Seeder
             'privacy' => 'public',
             'code' => null,
         ]);
+        Listing::factory(6)->create();
     }
 }
