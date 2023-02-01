@@ -2,6 +2,7 @@
 # Project cuối kì môn thực hành lập trình Web
 
 ## **[Link database design](https://dbdiagram.io/d/638a088dbae3ed7c45445a4c)**
+## [Link slide báo cáo](https://docs.google.com/presentation/d/1qv1rexb1-IP0O_L8GMwQiLrM2BSWiqJmWmQPQSBCbkY/edit?usp=sharing)
 
 
 ### Cấu hình yêu cầu
