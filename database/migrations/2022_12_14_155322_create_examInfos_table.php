@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('examInfos', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->foreignId('teacher_id')->constrained('Teachers');
-            $table->foreignId('course_id')->constrained('Courses');
+            $table->foreignId('teacher_id')->constrained('teachers');
+            $table->foreignId('course_id')->constrained('courses');
             $table->integer('question_lenth');
             $table->string('time');
 
