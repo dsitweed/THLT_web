@@ -9,10 +9,11 @@ use Illuminate\Http\Request;
 class ListingController extends Controller
 {
     // Show all courses
-    public function index(){
+    public function index(Request $request){
+        // dd($request->tag);
         return view('course.course-index',[
             // 'listings' => Listing::all()
-            'listings'=> Course::all()
+            'listings'=> Course::latest()->filter(request(['tag','search']))->get()
         ]);
     }
     // Show single course

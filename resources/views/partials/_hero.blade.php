@@ -13,6 +13,7 @@ class="relative h-72 bg-laravel flex flex-col justify-center align-center text-c
     <p class="text-2xl text-gray-200 font-bold my-4">
         Học và thi trực tuyến.
     </p>
+    @guest
     <div>
         <a
             href="/login"
@@ -20,5 +21,24 @@ class="relative h-72 bg-laravel flex flex-col justify-center align-center text-c
             >Đăng Ký Ngay</a
         >
     </div>
+    @else
+        @if(Auth::user()->role == 'student')
+        <div>
+            <a
+                href="/student/join-course"
+                class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black"
+                >Đăng Ký Khóa Học Mới</a
+            >
+        </div>
+        @else
+        <div>
+            <a
+                href="/home"
+                class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black"
+                >Khóa học của tôi</a
+            >
+        </div>
+        @endif
+    @endguest
 </div>
 </section>

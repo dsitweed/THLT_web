@@ -28,7 +28,7 @@
 </head>
 
 <body class="min-h-screen flex flex-col">
-
+    <x-flash-message />
     {{-- Toggle navbar --}}
     <nav class="bg-slate-800 text-slate-200 border-gray-200 px-2 sm:px-4 py-2.5">
         <div class="container flex flex-wrap items-center justify-between mx-auto">
@@ -88,6 +88,7 @@
     @include('partials.success')
 
     @yield('content')
+
     <!-- Scripts -->
     <div>
         <script src="{{ asset('js/app.js') }}"></script>

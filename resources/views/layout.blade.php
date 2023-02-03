@@ -74,6 +74,8 @@
             @yield('content')
             {{-- all the content section wrap aroung layout --}}
         </main>
+        @guest
+        @else
         <footer
             class="fixed bottom-0 left-0 w-full flex items-center justify-start font-bold bg-laravel text-white h-24 mt-24 opacity-90 md:justify-center"
         >
@@ -85,5 +87,7 @@
                 >Post Job</a
             >
         </footer>
+        @endguest
+        <x-flash-message />
 </body>
 </html>

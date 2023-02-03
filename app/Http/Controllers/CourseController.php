@@ -41,7 +41,7 @@ class CourseController extends Controller
             'teacher_id' => $teacher->id,
         ]);        
 
-        return redirect('/course');
+        return redirect('/course')->with('message', 'Đã tạo khóa học mới thành công !');
     }
 
     public function showCourseForum($course_id) {

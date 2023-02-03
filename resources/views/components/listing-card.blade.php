@@ -21,9 +21,9 @@ $user = User::find($teacher->user_id);
             <div class="text-xl font-bold mb-4">
                 {{$user->name}}
             </div>
-            <x-listing-tags :tagsCsv="$item->tags" />
+            <b><x-listing-tags :tagsCsv="$item->tag" /></b>
             <div class="text-lg mt-4">
-                <i class="fa-solid fa-location-dot"></i> {{$item->description}}
+                <i class="fas fa-info"></i> {{$item->description}}
             </div>
         </div>
     </div>
