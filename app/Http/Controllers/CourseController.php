@@ -28,7 +28,7 @@ class CourseController extends Controller
         $teacher = Teacher::where('user_id', Auth::user()->id)->first();
 
         $formField = $request->validate([
-            'course_name' => Rule::unique('courses', 'name')
+            'course_name' => Rule::unique('courses', 'name'),
         ]);
         $bytes = random_bytes(5);
         $randomCode = bin2hex($bytes);
@@ -37,6 +37,7 @@ class CourseController extends Controller
             'description' => $_POST['course_description'],
             'privacy' => $_POST['privacy'],
             'code' =>  ($_POST['privacy'] == 'private' ? $randomCode : null),
+            'tag' => $_POST['course_tag'],
             'teacher_id' => $teacher->id,
         ]);        
 

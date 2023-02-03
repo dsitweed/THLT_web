@@ -102,7 +102,8 @@ class StudentController extends Controller
     public function joinCourse() {
         // Lấy toàn bộ khóa học public và các khóa học private đã đăng ký
         $listCourse = Course::where('privacy', 'public')->get();
-        $joinedCourses = joinCourse::where('student_id', Auth::user()->id)->get();
+        $student_id = Student::where('user_id', Auth::user()->id)->value('id');
+        $joinedCourses = joinCourse::where('student_id', $student_id)->get();
         foreach ($joinedCourses as $key => $value) {
             $course = Course::find($value->course_id);
             if ($course->privacy == 'private') $listCourse[] = $course;
@@ -125,9 +126,12 @@ class StudentController extends Controller
     }
 
     public function joinCourseSave(Request $request) {
+        $user_id = $request->student_id;
+        $student_id = Student::where('user_id', $user_id)->value('id');
+
         JoinCourse::create([
             'course_id' => $request->course_id,
-            'student_id' => $request->student_id
+            'student_id' => $student_id
         ]);
         return redirect('/');
     }

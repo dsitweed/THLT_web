@@ -16,6 +16,7 @@
                 <tr>
                     <th class="{{$thClass}}">ID khóa học</th>
                     <th class="{{$thClass}}">Tên khóa học</th>
+                    <th class="{{$thClass}}">Nhãn</th>
                     <th class="{{$thClass}}">Loại</th>
                     <th class="{{$thClass}}">Mã code</th>
                     <th class="{{$thClass}}">Miêu tả khóa học</th>
@@ -29,6 +30,7 @@
                     <tr>
                         <td class="{{$tdClass}}">{{$item->id}}</td>
                         <td class="{{$tdClass}}">{{$item->name}}</td>
+                        <td class="{{$tdClass}}">{{$item->tag}}</td>
                         <td class="{{$tdClass}}">{{$item->privacy}}</td>
                         <td class="{{$tdClass}}">{{$item->code}}</td>
                         <td class="{{$tdClass}}">{{$item->description}}</td>

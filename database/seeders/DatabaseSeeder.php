@@ -29,7 +29,8 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'id' => 1,
-            'name' => "Student1",
+            'name' => "Lê Trọng Nghĩa",
+            'age' => 22,
             'email' => "student@gmail.com",
             'password' => Hash::make("123"),
             'role' => 'student',
@@ -42,7 +43,8 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'id' => 2,
-            'name' => "Teacher",
+            'name' => "Hà Ánh Phượng",
+            'age' => 32,
             'email' => "teacher@gmail.com",
             'password' => Hash::make("123"),
             'role' => 'teacher',
@@ -56,7 +58,8 @@ class DatabaseSeeder extends Seeder
 
         Course::create([
             'id' => 1,
-            "name" => 'Math',
+            "name" => 'Toán giữa kì lớp 11 năm 2023',
+            'tag' => 'Math 11',
             'description' => "Just for test",
             'teacher_id' => 1,
             'privacy' => 'public',
