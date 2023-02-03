@@ -9,7 +9,7 @@ class="lg:grid lg:grid-cols-2 gap-4 space-y-4 md:space-y-0 mx-4"
     {{-- echo = {{}} --}}
 
 @if (count($listings) == 0)
-    <p>No listings found</p>
+    <p>No course available</p>
 @else
 @foreach($listings as $item)  
     {{-- pass $listing to listing => have to use prefix : --}}

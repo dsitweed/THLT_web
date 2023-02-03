@@ -1,16 +1,18 @@
 <?php
 
+use App\Models\Course;
 use App\Models\Listing;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ExaminfoController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\QuestionController;
 
 /*
@@ -34,12 +36,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
-Route::get('/',function(){
-    return view('listings',[
-        'listings'=> Listing::all()
-    ]);
-});
+// Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
+
+Route::get('/',[ListingController::class, 'index']);
+
+Route::get('/listings/{listing}', [ListingController::class,'show']);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

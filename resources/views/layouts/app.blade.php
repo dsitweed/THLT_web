@@ -6,7 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/images/logo.png" type="image/ong">
-
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -43,13 +49,19 @@
                                 class="block py-2 pl-3 pr-4  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-100 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Register</a>
                         </li>
                     @else
+                        <a href="/home" class="block py-2 px-3 rounded-lg hover:bg-gray-800">
+                            <i class="fa-sharp fa-solid fa-book"></i>    My Course</a
+                        >
                         <a href="/profile" class="block py-2 px-3 rounded-lg hover:bg-gray-800">
+                            <i class="fa-sharp fa-solid fa-user"></i> 
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
                         <a href="{{ route('logout') }}" class="block py-2 px-3  rounded-lg hover:bg-gray-800"
                             onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">Đăng
-                            xuất</a>
+                                document.getElementById('logout-form').submit();">
+                                <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
+                                Log Out</a
+                            >                        
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
@@ -59,6 +71,19 @@
         </div>
 
     </nav>
+    @php
+     $landPages = explode('/',url()->current());
+     $landPage = $landPages[sizeof($landPages)-1];
+    @endphp
+    @if(url()->previous() != url()->current() && $landPage != "home")
+    <a href="{{ url()->previous() }}" class="block py-2 px-3  rounded-lg hover:bg-gray-500 "
+        ><i class="fa-solid fa-arrow-left"></i> Back
+    </a>
+    @else
+    <p class="block py-2 px-3  rounded-lg hover:bg-gray-500 "
+    ><i class="fa-solid fa-arrow-left"></i> Back
+    </p>
+    @endif
     @include('partials.errors')
     @include('partials.success')
 

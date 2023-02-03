@@ -50,6 +50,7 @@ class DatabaseSeeder extends Seeder
 
         Teacher::create([
             'id' => 1,
+            'name' => 'Ky',
             'user_id' => 2,
         ]);
 
