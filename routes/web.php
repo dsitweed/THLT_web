@@ -38,9 +38,6 @@ Route::get('/dashboard', function () {
 
 // Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
 
-Route::get('/',[ListingController::class, 'index']);
-
-Route::get('/listings/{listing}', [ListingController::class,'show']);
 
 
 Route::middleware('auth')->group(function () {
@@ -51,6 +48,11 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 /* Phần trên là mặc định của laravel và Breeze  */
+
+
+Route::get('/',[ListingController::class, 'index']);
+
+Route::get('/listings/{listing}', [ListingController::class,'show']);
 
 Route::get('/home', [HomeController::class, 'index']);
 

@@ -24,50 +24,48 @@
                 },
             };
         </script>
-        <title>Học trực tuyến</title>
+        <title>Thi trực tuyến</title>
     </head>
     <body class="mb-48">
-        <nav class="flex justify-between items-center mb-4">
+        <nav class="bg-red-600 text-slate-900 border-gray-200 px-2 sm:px-4 py-2.5 flex justify-between items-center mb-4">
+            {{-- style="background-image: url('images/header-bg.png')"> --}}
             <a href="/"
-                ><img class="w-24" src="{{asset('images/logo - Copy.png')}}" alt="" class="logo"
+                ><img class="w-24" src="{{asset('images/logo.png')}}" alt="" class="logo"
             /></a>
             <ul class="flex space-x-6 mr-6 text-lg">
-            @guest
-                <li>
-                    <a href="/register" class="hover:text-laravel"
-                        ><i class="fa-solid fa-user-plus"></i> Register</a
-                    >
-                </li>
-                <li>
-                    <a href="/login" class="hover:text-laravel"
+            <div class="flex flex-row gap-3 px-4 py-2 rounded-lg bg-red-400 text-white">
+                @guest
+                    <li>
+                        <a href="/login" class="hover:text-black"
                         ><i class="fa-solid fa-arrow-right-to-bracket"></i>
-                        Login</a
-                    >
-                </li>
-            </ul>
-            @else
-                <li>
-                    <a href="/home" class="hover:text-laravel"
-                        ><i class="fa-sharp fa-solid fa-book"></i> My Course</a
-                    >
-                </li>
-                <li>
-                    <a href="/profile" class="hover:text-laravel"
-                        ><i class="fa-sharp fa-solid fa-user"></i> {{Auth::user()->name}} </a
+                            Login</a
                         >
-                </li>
-                <li>
-                    <a href="{{route('logout')}}" class="hover:text-laravel" 
-                        onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                        <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
-                        Log Out</a
-                    >
-                    <form id="logout-form" action="{{ route('logout')}}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </li>
-            @endguest
+                    </li>
+                    <li>
+                        <a href="/register" class="hover:text-black"
+                            ><i class="fa-solid fa-user-plus"></i> Register</a
+                        >
+                    </li>
+                </ul>
+                @else
+                        <a href="/home" class="block py-2 px-3 rounded-lg  hover:bg-gray-800 hover:text-white">
+                            <i class="fa-sharp fa-solid fa-book"></i>    My Course</a
+                        >
+                        <a href="/profile" class="block py-2 px-3 rounded-lg  hover:bg-gray-800 hover:text-white">
+                            <i class="fa-sharp fa-solid fa-user"></i> 
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+                        <a href="{{ route('logout') }}" class="block py-2 px-3  rounded-lg  hover:bg-gray-800 hover:text-white"
+                            onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
+                                Log Out</a
+                            >                        
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                @endguest
+            </div>
         </nav>
         <main>
             {{-- VIEW OUTPUT --}}

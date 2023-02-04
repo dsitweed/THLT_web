@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use App\Models\Listing;
 use Illuminate\Http\Request;
 
 class ListingController extends Controller
@@ -17,7 +16,7 @@ class ListingController extends Controller
         ]);
     }
     // Show single course
-    public function show(Listing $listing){
+    public function show(Course $listing){
         return view('course.show', [
             //variable_name => values
             'listing' => $listing
