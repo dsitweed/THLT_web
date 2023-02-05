@@ -7,13 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/images/logo.png" type="image/ong">
     <script src="//unpkg.com/alpinejs" defer></script>
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
-    />
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -31,7 +27,7 @@
 <body class="min-h-screen flex flex-col">
     <x-flash-message />
     {{-- Toggle navbar --}}
-    <nav class="bg-red-600 text-slate-900 border-gray-200 px-2 sm:px-4 py-2.5 flex justify-between items-center mb-4">
+    <nav class="bg-red-600 text-slate-900 border-gray-200 px-2 sm:px-4 py-2.5 flex justify-between items-center">
         <div class="container flex flex-wrap items-center justify-between mx-auto">
             <a href="/" class="flex items-center hover:text-white">
                 <img class="w-24" src="{{ asset('images/logo.png') }}" class="logo" alt="Flowbite Logo" />
@@ -51,18 +47,16 @@
                         </li>
                     @else
                         <a href="/home" class="block py-2 px-3 rounded-lg hover:bg-gray-800">
-                            <i class="fa-sharp fa-solid fa-book"></i>    My Course</a
-                        >
+                            <i class="fa-sharp fa-solid fa-book"></i> My Course</a>
                         <a href="/profile" class="block py-2 px-3 rounded-lg hover:bg-gray-800">
-                            <i class="fa-sharp fa-solid fa-user"></i> 
+                            <i class="fa-sharp fa-solid fa-user"></i>
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
                         <a href="{{ route('logout') }}" class="block py-2 px-3  rounded-lg hover:bg-gray-800"
                             onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
-                                <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
-                                Log Out</a
-                            >                        
+                            <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
+                            Log Out</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
@@ -73,10 +67,10 @@
 
     </nav>
     @php
-     $landPages = explode('/',url()->current());
-     $landPage = $landPages[sizeof($landPages)-1];
+        $landPages = explode('/', url()->current());
+        $landPage = $landPages[sizeof($landPages) - 1];
     @endphp
-    @if(url()->previous() != url()->current() && $landPage != "home")
+    {{-- @if (url()->previous() != url()->current() && $landPage != 'home')
     <a href="{{ url()->previous() }}" class="block py-2 px-3  rounded-lg hover:bg-red-600 hover:text-white "
         ><i class="fa-solid fa-arrow-left"></i> Back
     </a>
@@ -84,7 +78,7 @@
     <p class="block py-2 px-3  rounded-lg hover:text-white hover:bg-red-200 "
     ><i class="fa-solid fa-arrow-left"></i> Back
     </p>
-    @endif
+    @endif --}}
     @include('partials.errors')
     @include('partials.success')
 
