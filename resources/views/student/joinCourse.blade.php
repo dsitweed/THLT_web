@@ -17,7 +17,7 @@
 @section('content')
     <div>
         <div class="flex flex-col justify-center items-center mt-4">
-            <h1>Đăng ký khóa học private bằng code</h1>
+            <h1 class="mb-2">Đăng ký khóa học private bằng code</h1>
             <form action="/student/join-course-private" method="post" class="flex">
                 @csrf
                 <input type="text" name="code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">

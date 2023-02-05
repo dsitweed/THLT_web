@@ -19,6 +19,7 @@ return new class extends Migration
             $table->longText('description');
             $table->longText('privacy');
             $table->longText('code')->nullable();
+            $table->string('tag');
             $table->foreignId('teacher_id')->constrained('teachers');
             $table->timestamps();
         });

@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('students');
-            $table->foreignId('question_id')->constrained('questions');
-            $table->foreignId('exam_id')->constrained('examInfos');
-            $table->foreignId('result_id')->constrained('results');
+            $table->integer('student_id');
+            $table->integer('question_id');
+            $table->integer('exam_id');
+            $table->integer('result_id');
             $table->string('given_answer');
 
             // cách thiết lập khóa ngoài theo cách cũ 

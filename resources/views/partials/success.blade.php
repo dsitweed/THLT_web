@@ -4,7 +4,7 @@
             <span aria-hidden="true">&times;</span>
         </button>
         <strong>
-            {{!! session()->get('success') !!}}
+            {{!! session()->get('success')}}
         </strong>
     </div>
 @endif

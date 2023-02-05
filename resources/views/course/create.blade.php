@@ -14,6 +14,12 @@
                 <p class="text-red-500 text-xs mt-1">{{$message}}</p>
             @enderror
             <input class="border border-black p-2 rounded-md" type="text" name="course_name" required>
+
+            <label class="my-2" for=""> Course tag</label>
+            @error('course_tag')
+                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+            @enderror
+            <input class="border border-black p-2 rounded-md" type="text" name="course_tag" required>
             
             <label class="my-2" for=""> Course type</label>
             <div class="flex gap-10">

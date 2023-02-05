@@ -11,6 +11,6 @@
             <a class="{{$button}}" href="{{route('teacher.show-all-exams')}}">Tất cả đề thi</a>
             <a class="{{$button}}" href="{{route('teacher.show-forum')}}">Các nhóm thảo luận</a>
         </div>
-        <div class="basis-2/3">right</div>
+        <div class="basis-2/3"></div>
     </div>
 @endsection
