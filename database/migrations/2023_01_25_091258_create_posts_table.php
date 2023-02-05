@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('course_id')->constrained('courses');
             $table->longText('title');
-            $table->multiLineString('body');
+            $table->longText('body');
             $table->unsignedInteger('like');
         });
     }

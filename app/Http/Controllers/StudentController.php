@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\Student;
 use App\Models\Teacher;
-use App\Models\Examinfo;
+use App\Models\ExamInfo;
 use App\Models\Question;
 use App\Models\JoinCourse;
 use Illuminate\Http\Request;

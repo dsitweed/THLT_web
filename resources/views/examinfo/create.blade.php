@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @php
-    $teacher = App\Models\Teacher::where('user_id', Auth::user()->id)->get();
-    $courses = App\Models\Course::where('teacher_id', $teacher[0]->id)->get();
+    if (Auth::user()) {
+        $teacher = App\Models\Teacher::where('user_id', Auth::user()->id)->get();
+        $courses = App\Models\Course::where('teacher_id', $teacher[0]->id)->get();
+    } else {
+    }
 @endphp
 
 @section('content')

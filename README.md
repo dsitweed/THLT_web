@@ -2,9 +2,10 @@
 # Project cuối kì môn thực hành lập trình Web
 
 ## **[Link database design](https://dbdiagram.io/d/638a088dbae3ed7c45445a4c)**
-## [Link slide báo cáo](https://docs.google.com/presentation/d/1qv1rexb1-IP0O_L8GMwQiLrM2BSWiqJmWmQPQSBCbkY/edit?usp=sharing)
 
 ## [Link slide báo cáo](https://docs.google.com/presentation/d/1qv1rexb1-IP0O_L8GMwQiLrM2BSWiqJmWmQPQSBCbkY/edit?usp=sharing)
+
+## [Link để commit tốt hơn](https://dev.to/ashishxcode/mastering-the-art-of-writing-effective-github-commit-messages-5d2p?fbclid=IwAR0PNnH_tbIVV_CR4KU4wcKurgkEi8s5Lvot6CB3whKJesnm1a33wvUuUs0)
 
 ### Cấu hình yêu cầu
 #### Đây là cấu hình tại máy của tôi (Kỳ)
@@ -13,8 +14,8 @@
 - PHP: 8.1.2 (php -v)
 - Laravel Framework 9.47.0
 <!-- - Composer version 2.4.4 (composer -V) -->
-## Database
-- Hiện đang config sqlite (chuyển đổi kiểu rất dễ)
+## Database (Mysql)
+- Hiện đang config mysql (Chuyển đổi kiểu rất dễ)
 ### Cách config
 1. Đổi mysql thành mysql trong file config > database.php 
 2. Trong file .env bỏ config liên quan tới mysql thay bằng
@@ -38,7 +39,7 @@ php artisan migrate
 
 ## Cài đặt lần đầu khi clone về
 ```
-cd Programing
+cd THLT_web
 cp .env.example .env
 npm i
 <!-- Cài đặt các dependence -->
