@@ -42,6 +42,7 @@ class PostController extends Controller
             "commenter_id" => $request->commenter_id,
             "commenter_name" => $commenter->name,
         ]);
+
         return redirect()->back();
     }
 
