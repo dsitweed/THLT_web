@@ -29,7 +29,6 @@ class PostController extends Controller
 
         $formField['like'] = 0;
         $formField['user_id'] = Auth::user()->id;
-
         Post::create($formField);
         return redirect()->back();
     }

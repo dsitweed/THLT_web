@@ -47,14 +47,14 @@
                     @foreach ($listCourse as $item)
                         <tr class="hover:bg-yellow-100">
                             <td class="{{ $tdClass }}">
-                                <a href="/course/forum/{{$item->id}}">{{ $item->name }}</a>
+                                {{ $item->name }}
                             </td>
                             <td class="{{ $tdClass }}">{{ $item->teacher_name }}</td>
                             <td class="{{ $tdClass }}">{{ $item->description}}</td>
                             <td class="{{ $tdClass }}">{{ $item->privacy}}</td>
                             <td class="{{ $tdClass }}">{{ $item->code}}</td>
                             <td class="{{ $tdClass }}">{{ $item->number_student}} người</td>
-                            <td class="{{ $tdClass }}">
+                            <td class="{{ $tdClass }} flex justify-center">
                                 <form action="/student/join-course/" method="post">
                                     @csrf
                                     <input type="hidden" name="course_id" value="{{$item->id}}">
@@ -65,6 +65,7 @@
                                         <button class="bg-slate-600 text-white p-2 rounded-lg" type="submit">Đăng ký</button>
                                     @endif
                                 </form>
+                                <a class="bg-slate-600 text-white p-2 rounded-lg" href="/course/forum/{{$item->id}}">Vào nhóm chat</a>
                             </td>
                         </tr>
                     @endforeach

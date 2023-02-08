@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Examinfo;
+use App\Models\ExamInfo;
 use App\Models\Question;
 
 

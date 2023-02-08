@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Teacher;
-use App\Models\Examinfo;
+use App\Models\ExamInfo;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -42,7 +42,7 @@ class ExaminfoController extends Controller
         $teacher = Teacher::where('user_id', $request->input('user_id'))->first();
 
         $formField = $request->validate([
-            'name' => Rule::unique('examInfos', 'name'),
+            'name' => Rule::unique('exam_infos', 'name'),
             'question_lenth' => ['integer', 'gt:0'],
             'time' => ['integer', 'gt:0'],
             'user_id' => ['required'],

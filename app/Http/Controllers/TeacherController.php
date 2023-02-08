@@ -8,7 +8,7 @@ use App\Models\Course;
 use App\Models\Result;
 use App\Models\Student;
 use App\Models\Teacher;
-use App\Models\Examinfo;
+use App\Models\ExamInfo;
 use App\Models\JoinCourse;
 use App\Models\Question;
 use Illuminate\Http\Request;

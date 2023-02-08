@@ -6,7 +6,7 @@ use App\Models\Answer;
 use App\Models\Course;
 use App\Models\Result;
 use App\Models\Student;
-use App\Models\Examinfo;
+use App\Models\ExamInfo;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

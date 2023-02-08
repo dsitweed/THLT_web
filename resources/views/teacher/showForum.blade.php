@@ -22,6 +22,7 @@
                         <th class="{{ $thClass }}">Loại</th>
                         <th class="{{ $thClass }}">Code</th>
                         <th class="{{ $thClass }}">Số học sinh</th>
+                        <th class="{{ $thClass }}">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,13 +30,16 @@
                     @foreach ($listCourse as $item)
                         <tr class="hover:bg-yellow-100">
                             <td class="{{ $tdClass }}">
-                                <a href="/course/forum/{{$item->id}}">{{ $item->name }}</a>
+                                {{ $item->name }}
                             </td>
                             <td class="{{ $tdClass }}">{{ $item->teacher_name }}</td>
                             <td class="{{ $tdClass }}">{{ $item->description}}</td>
                             <td class="{{ $tdClass }}">{{ $item->privacy}}</td>
                             <td class="{{ $tdClass }}">{{ $item->code}}</td>
                             <td class="{{ $tdClass }}">{{ $item->number_student}} người</td>
+                            <td class="{{ $tdClass }}">
+                                <a class="bg-slate-600 text-white p-2 rounded-lg ml-2" href="/course/forum/{{$item->id}}">Vào nhóm chat</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
