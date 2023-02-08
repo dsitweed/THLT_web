@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('post_id')->constrained('posts');
-            $table->multiLineString('body');
+            $table->longText('body');
             $table->unsignedInteger('like');
             $table->unsignedInteger('commenter_id');
             $table->string('commenter_name');
