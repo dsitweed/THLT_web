@@ -76,7 +76,7 @@
      $landPages = explode('/',url()->current());
      $landPage = $landPages[sizeof($landPages)-1];
     @endphp
-    @if(url()->previous() != url()->current() && $landPage != "home")
+    {{-- @if(url()->previous() != url()->current() && $landPage != "home")
     <a href="{{ url()->previous() }}" class="block py-2 px-3  rounded-lg hover:bg-red-600 hover:text-white "
         ><i class="fa-solid fa-arrow-left"></i> Back
     </a>
@@ -84,7 +84,7 @@
     <p class="block py-2 px-3  rounded-lg hover:text-white hover:bg-red-200 "
     ><i class="fa-solid fa-arrow-left"></i> Back
     </p>
-    @endif
+    @endif --}}
     @include('partials.errors')
     @include('partials.success')
 

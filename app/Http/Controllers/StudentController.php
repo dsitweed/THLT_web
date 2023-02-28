@@ -124,7 +124,6 @@ class StudentController extends Controller
             'joinedCourses' => $joinedCourses,
         ]);
     }
-
     public function joinCourseSave(Request $request) {
         $user_id = $request->student_id;
         $student_id = Student::where('user_id', $user_id)->value('id');
@@ -133,7 +132,7 @@ class StudentController extends Controller
             'course_id' => $request->course_id,
             'student_id' => $student_id
         ]);
-        return redirect('/');
+        return redirect(url()->current())->with('message', 'Đã đăng ký thành công !');;
     }
 
     public function joinCoursePrivateSave(Request $request) {

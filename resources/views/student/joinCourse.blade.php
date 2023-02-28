@@ -65,7 +65,7 @@
                                         <button class="bg-slate-600 text-white p-2 rounded-lg" type="submit">Đăng ký</button>
                                     @endif
                                 </form>
-                                <a class="bg-slate-600 text-white p-2 rounded-lg" href="/course/forum/{{$item->id}}">Vào nhóm chat</a>
+                                <a class="bg-slate-600 text-white p-2 ml-3 rounded-lg" href="/course/forum/{{$item->id}}">Vào nhóm chat</a>
                             </td>
                         </tr>
                     @endforeach
